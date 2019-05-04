@@ -27,8 +27,7 @@ class NeuronioMP:
         :return: época em que o erro chegou a 0 e atualiza os pesos do perceptron
         """
         epoch = 0
-        for i in range(epochs):
-            epoch = i
+        for epoch in range(epochs):
             total_error = 0
             np.random.shuffle(training_base)
             x_training = np.delete(training_base, -1, axis=1)

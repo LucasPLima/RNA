@@ -1,1 +1,1 @@
-from SimplePerceptron import main
+import SimplePerceptron.RunPerceptron

@@ -2,13 +2,18 @@ from sklearn.model_selection import train_test_split
 import time
 import Util as ut
 import SimplePerceptron.NeuronioPerceptron as ps
+import yaml
 
 
 def main():
-    base, n_features = ut.load_iris_dataset(0)
-    learning_rate = 0.03
-    iterations = 20
-    epochs = 300
+    stream = open('configurations/runConfigurations.yml', 'r', encoding='utf-8').read()
+    configurations = yaml.load(stream=stream, Loader=yaml.FullLoader)
+
+    base, n_features = ut.load_base(configurations['chosen_base'])
+
+    learning_rate = configurations['learning_rate']
+    iterations = configurations['realizations']
+    epochs = configurations['epochs']
     realizations = []
 
     m_epochs = 0
@@ -16,12 +21,17 @@ def main():
 
     for i in range(iterations):
         start = time.time()
-        training_base, test_base = train_test_split(base, test_size=0.2)
+        training_base, test_base = train_test_split(base, test_size=configurations['test_size'])
 
-        simplePerceptron = ps.NeuronioMP(nweights= n_features +1)
+        simplePerceptron = ps.NeuronioMP(nweights=n_features + 1)
         m_epochs += simplePerceptron.training(training_base, epochs=epochs, learning_rate=learning_rate)
-        accuracy, predict = simplePerceptron.hit_rate(test_base)
-        realizations.append((accuracy, predict, training_base, simplePerceptron.weights, test_base))
+        hit_rate, predict = simplePerceptron.hit_rate(test_base)
+
+        realizations.append({'weights': simplePerceptron.weights,
+                             'hit_rate': hit_rate,
+                             'predict': predict,
+                             'training_base': training_base,
+                             'test_base': test_base})
 
         end = time.time()
         total_time += (end - start)
@@ -43,15 +53,15 @@ def choose_realization(realizations):
     :return: a melhor realização com base na taxa de acerto média;
     """
     accuracy = 0
-    for i in realizations:
-        accuracy += i[0]
+    for realization in realizations:
+        accuracy += realization['hit_rate']
 
     accuracy = accuracy / len(realizations)
-    print('Mean accuracy: {}'.format(accuracy))
+    print('Accuracy: {}'.format(accuracy))
 
     n = 0
     for n in range(len(realizations)):
-        if realizations[n][0] >= accuracy:
+        if realizations[n]['hit_rate'] >= accuracy:
             break
     return realizations[n]
 
