@@ -1,7 +1,8 @@
-import numpy as np
 from sklearn import preprocessing, datasets
-import copy
+import numpy as np
 import matplotlib.pyplot as plt
+import SimplePerceptron.NeuronioPerceptron as ps
+import copy
 import yaml
 
 
@@ -115,3 +116,45 @@ def load_base(chosen_base):
         print('Base escolhida não é válida.')
         print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')
         exit()
+
+
+def plot_decision_region(realization, configurations, iris_cfg, class_names):
+    plt.rcParams['figure.figsize'] = (11, 7)
+    plot_colors = "rb"
+    plot_step = 0.02
+
+    base = realization['test_base']
+
+    x_min, x_max = base[:, 1].min() - 1, base[:, 1].max() + 1
+    y_min, y_max = base[:, 2].min() - 1, base[:, 2].max() + 1
+
+    xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
+                         np.arange(y_min, y_max, plot_step))
+
+    # plt.tight_layout()
+    data = np.c_[xx.ravel(), yy.ravel()]
+    bias_col = -np.ones(data.shape[0])
+
+    data = np.insert(data, 0, bias_col, axis=1)
+    perceptron_g = ps.NeuronioMP(3)
+    perceptron_g.weights = realization['weights']
+
+    Z = np.array([perceptron_g.predict(x) for x in data])
+    Z = Z.reshape(xx.shape)
+
+    cs = plt.contourf(xx, yy, Z, cmap=plt.cm.RdYlBu)
+    y = base[:, -1]
+
+    if configurations['chosen_base'] == 'Iris':
+        attributes = iris_cfg['features']
+        plt.xlabel(attributes[0])
+        plt.ylabel(attributes[1])
+    else:
+        plt.xlabel('Attribute x')
+        plt.ylabel('Attribute y')
+
+    for i, color in zip(range(len(class_names)), plot_colors):
+        idx = np.where(y == i)
+        plt.scatter(base[idx, 1], base[idx, 2], c=color, label=class_names[i],
+                    cmap=plt.cm.RdYlBu, edgecolor='black', s=15)
+    plt.show()

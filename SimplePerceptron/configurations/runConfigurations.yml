@@ -6,8 +6,8 @@
 # learning_rate: Taxa de aprendizado;
 # test_size: Porcentagem da base de teste.
 
-chosen_base: 'Iris'
+chosen_base: 'Artificial'
 realizations: 20
-epochs: 300
-learning_rate: 0.2
+epochs: 100
+learning_rate: 0.3
 test_size: 0.2
