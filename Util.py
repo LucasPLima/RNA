@@ -162,10 +162,10 @@ def plot_decision_region(realization, configurations, iris_cfg, class_names):
     for i, color in zip(range(len(class_names)), plot_colors):
         idx = np.where(y_test == i)
         plt.scatter(test_base[idx, 1], test_base[idx, 2], marker='^', c=color, label=class_names[i],
-                    edgecolor='black', s=15)
+                    edgecolor='black', s=20)
         idx = np.where(y_training == i)
         plt.scatter(training_base[idx, 1], training_base[idx, 2], marker='s', c=color,
-                    edgecolor='black', s=15)
+                    edgecolor='black', s=20)
 
     plt.show()
 
@@ -197,12 +197,12 @@ def choose_realization(realizations, criterion_choiced):
     if criterion_choiced == 1:
         best_result = max(hit_rates)
         n = hit_rates.index(best_result)
-        print('Melhor realização: {}'.format(n+1))
+        print('Melhor realização: {} (Taxa de acerto: {}).'.format(n+1, hit_rates[n]))
     else:
-        d_means = [accuracy - h for h in hit_rates]
+        d_means = [abs(accuracy - h) for h in hit_rates]
         nearest_accuracy = min(d_means)
         n = d_means.index(nearest_accuracy)
-        print('Realização mais próxima da acurácia: {}.'.format(n + 1))
+        print('Realização mais próxima da acurácia: {}(Taxa de acerto: {}).'.format(n + 1, hit_rates[n]))
 
     return realizations[n]
 
@@ -262,7 +262,7 @@ def plot_confusion_matrix(cm, classes,
     plt.xticks(tick_marks, classes, rotation=45)
     plt.yticks(tick_marks, classes)
 
-    fmt = '.2f' if normalize else 'd'
+    fmt = '.3f' if normalize else 'd'
     thresh = cm.max() / 2.
     for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], fmt),

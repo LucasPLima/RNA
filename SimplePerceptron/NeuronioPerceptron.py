@@ -40,7 +40,7 @@ class NeuronioMP:
                 total_error += abs(error)
             if total_error == 0:
                 break
-        return epoch
+        return epoch + 1
 
     def hit_rate(self, test_base):
         """
