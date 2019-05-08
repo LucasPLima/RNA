@@ -125,10 +125,11 @@ def plot_decision_region(realization, configurations, iris_cfg, class_names):
     plot_colors = "rb"
     plot_step = 0.02
 
-    base = realization['test_base']
+    test_base = realization['test_base']
+    training_base = realization['training_base']
 
-    x_min, x_max = base[:, 1].min() - 1, base[:, 1].max() + 1
-    y_min, y_max = base[:, 2].min() - 1, base[:, 2].max() + 1
+    x_min, x_max = test_base[:, 1].min() - 0.2, test_base[:, 1].max() + 0.2
+    y_min, y_max = test_base[:, 2].min() - 0.2, test_base[:, 2].max() + 0.2
 
     xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
                          np.arange(y_min, y_max, plot_step))
@@ -144,7 +145,9 @@ def plot_decision_region(realization, configurations, iris_cfg, class_names):
     Z = Z.reshape(xx.shape)
 
     cs = plt.contourf(xx, yy, Z, cmap=plt.cm.RdYlBu)
-    y = base[:, -1]
+
+    y_test = test_base[:, -1]
+    y_training = training_base[:, -1]
 
     if configurations['chosen_base'] == 'Iris':
         attributes = iris_cfg['features']
@@ -154,10 +157,15 @@ def plot_decision_region(realization, configurations, iris_cfg, class_names):
         plt.xlabel('Attribute x')
         plt.ylabel('Attribute y')
 
+    plt.legend(class_names)
+
     for i, color in zip(range(len(class_names)), plot_colors):
-        idx = np.where(y == i)
-        plt.scatter(base[idx, 1], base[idx, 2], c=color, label=class_names[i],
-                    cmap=plt.cm.RdYlBu, edgecolor='black', s=15)
+        idx = np.where(y_test == i)
+        plt.scatter(test_base[idx, 1], test_base[idx, 2], marker='^', c=color, label=class_names[i],
+                    edgecolor='black', s=15)
+        idx = np.where(y_training == i)
+        plt.scatter(training_base[idx, 1], training_base[idx, 2], marker='s', c=color,
+                    edgecolor='black', s=15)
 
     plt.show()
 
