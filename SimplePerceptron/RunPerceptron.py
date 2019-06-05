@@ -21,7 +21,7 @@ def main():
 
     for i in range(iterations):
         start = time.time()
-        training_base, test_base = train_test_split(base, test_size=configurations['test_size'])
+        training_base, test_base = train_test_split(base, test_size=configurations['test_size'], stratify=base[:, -1])
 
         simplePerceptron = ps.NeuronioMP(nweights=n_features + 1)
         m_epochs += simplePerceptron.training(training_base, epochs=epochs, learning_rate=learning_rate)
