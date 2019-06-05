@@ -9,7 +9,7 @@
 # realization_choose: indica o critério de escolha da melhor realização: 1 para a melhor e 2 para a mais próxima da acurácia;
 
 
-chosen_base: 'Iris'
+chosen_base: 'Artificial'
 realizations: 20
 epochs: 300
 learning_rate: 0.1
