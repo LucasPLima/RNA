@@ -1,0 +1,23 @@
+# realizations: Número máximo de realizações;
+# epochs: Número máximo de épocas;
+# learning_rate: Taxa de aprendizado;
+# test_size: Porcentagem da base de teste.
+# realization_choose: indica o critério de escolha da melhor realização: 1 para a melhor e 2 para a mais próxima da acurácia;
+
+# linear model 1: z = 2x + 3 + noise
+# linear model 2: z = 2x + 3y + 2 + noise
+
+realizations: 20
+epochs: 300
+learning_rate: 0.01
+test_size: 0.2
+normalize: True
+
+n_samples: 30
+n_variables: 1
+coeficients:
+             - 2
+             - 3
+
+
+

@@ -1,5 +1,6 @@
 from sklearn import preprocessing, datasets
 from sklearn.metrics import confusion_matrix
+from math import sqrt
 import numpy as np
 import matplotlib.pyplot as plt
 import SimplePerceptron.NeuronioPerceptron as ps
@@ -121,9 +122,9 @@ def load_base(chosen_base):
 
 
 def plot_decision_region(realization, configurations, iris_cfg, class_names):
-    plt.rcParams['figure.figsize'] = (11, 7)
+    #plt.rcParams['figure.figsize'] = (10, 7)
     plot_colors = "rb"
-    plot_step = 0.02
+    plot_step = 0.01
 
     test_base = realization['test_base']
     training_base = realization['training_base']
@@ -197,7 +198,7 @@ def choose_realization(realizations, criterion_choiced):
     if criterion_choiced == 1:
         best_result = max(hit_rates)
         n = hit_rates.index(best_result)
-        print('Melhor realização: {} (Taxa de acerto: {}).'.format(n+1, hit_rates[n]))
+        print('Melhor realização: {} (Taxa de acerto: {}).'.format(n + 1, hit_rates[n]))
     else:
         d_means = [abs(accuracy - h) for h in hit_rates]
         nearest_accuracy = min(d_means)
@@ -272,3 +273,120 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
+
+
+def create_linear_model(n_variables, l_coeficients, n_samples, normalize):
+    if len(l_coeficients) == (n_variables + 1):
+        if n_variables == 1:
+            x_samples = -np.ones(n_samples)
+            for i in range(n_variables):
+                new_row = np.linspace(-10, 10, num=n_samples)
+                x_samples = np.vstack([x_samples, new_row])
+
+            x_samples = np.vstack([x_samples, np.ones(n_samples)])
+            l_coeficients.insert(0, 0)
+            f_x = np.dot(l_coeficients, x_samples)
+
+            y_samples = np.array(list(map(np.add, f_x, np.random.random(n_samples))))
+
+            linear_model = np.vstack([x_samples, y_samples])
+            linear_model = linear_model.transpose()
+            x_i = list(linear_model[:, 1])
+            y_i = list(linear_model[:, 3])
+            min_xi = min(x_i) - 0.5
+            max_xi = max(x_i) + 0.5
+            min_yi = min(y_i) - 0.5
+            max_yi = max(y_i) + 0.5
+            plt.plot(x_i, y_i, 'ro')
+            plt.axis([min_xi, max_xi, min_yi, max_yi])
+            plt.show()
+            if normalize:
+                normalized_linear_model = np.array(preprocessing.normalize(x_samples.transpose(), norm='max', axis=0))
+                normalized_linear_model = np.vstack([normalized_linear_model.transpose(), y_samples]).transpose()
+                normalized_linear_model[:, 0] = -np.ones(n_samples).T
+                return normalized_linear_model
+            else:
+                return linear_model
+        if n_variables == 2:
+            x_samples = np.arange(0, 10, 1, dtype=float)
+            dim = x_samples.size
+
+            linear_model = np.ones(shape=(dim * dim, 2))
+            perturbation = np.random.uniform(dim * dim)
+            l_coeficients.insert(0, 0)
+
+            i = 0
+            for aa, bb in itertools.product(x_samples, x_samples):
+                linear_model[i][0] = aa
+                linear_model[i][1] = bb
+                i += 1
+            y = l_coeficients[1] * linear_model[:, 0] + l_coeficients[2] * linear_model[:, 1] + l_coeficients[3] + perturbation
+
+            linear_model = np.insert(linear_model, 0, -np.ones(dim*dim), axis=1).transpose()
+            linear_model = np.vstack([linear_model, np.ones(dim*dim)])
+            linear_model = np.vstack([linear_model, np.array(y)]).transpose()
+
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            x_i = list(linear_model[:, 1])
+            y_i = list(linear_model[:, 2])
+            z_i = list(linear_model[:, 4])
+            ax.scatter(x_i, y_i, z_i, c='r', marker='o')
+            plt.show()
+
+            return linear_model
+    else:
+        print('Coeficients are lower or higher than (number_of_variables + 1)')
+        return None
+
+
+def plot_adaline_results(realization, normalize):
+    plt.figure()
+    x = [i for i in range(len(realization['cost']))]
+    plt.plot(x, realization['cost'])
+    plt.show()
+
+    fig = plt.figure()
+
+    if normalize:
+        points = np.linspace(-1, 1, 80)
+    else:
+        points = np.linspace(-10, 10, 80)
+
+    weights = realization['weights']
+    if len(weights) == 3:
+        c_points = []
+        for p in points:
+            data = []
+            data = [-1, p, 1]
+            c_points.append(data)
+
+        c_points = np.array(c_points)
+        predict = np.dot(weights, c_points.T)
+
+        t_base = realization['training_base']
+        plt.scatter(points, predict, c='b')
+        plt.scatter(t_base[:, 1], t_base[:, -1], c='r')
+    else:
+        t_base = np.delete(realization['training_base'], -1, axis=1)
+        t_base = np.vstack([t_base, np.delete(realization['test_base'],-1, axis=1)])
+        predict = np.dot(t_base, weights)
+        dim= int(sqrt(t_base.shape[0]))
+
+        plt3d = fig.gca(projection='3d')
+        plt3d.cla()
+
+        plt3d.scatter(t_base[:, 1], t_base[:, 2], predict, color='red', alpha=1.0)
+        xx = np.reshape(t_base[:, 1], (dim, dim))
+        yy = np.reshape(t_base[:, 2], (dim, dim))
+        zz = np.reshape(predict, (dim, dim))
+
+        plt3d.plot_surface(xx, yy, zz, rstride=10, cstride=10, antialiased=True,
+                           color='blue')
+        plt3d.set_xlabel('x1')
+        plt3d.set_ylabel('x2')
+        plt3d.set_zlabel('y')
+
+    plt.show()
+
+    print('Weights: {}'.format(realization['weights']))
