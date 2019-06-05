@@ -1,0 +1,19 @@
+# Se a base 'Iris' for escolhida, alterar o arquivo irisConfiguration.yml,
+# com base nas configurações desejadas
+
+# chosen_base: 'Iris' ou 'Artificial';
+# realizations: Número máximo de realizações;
+# epochs: Número máximo de épocas;
+# learning_rate: Taxa de aprendizado;
+# test_size: Porcentagem da base de teste.
+# neuron_type: Tipo de neurônio utilizado 'L' para Logístico e 'H' para Hiperbólico
+# realization_choose: indica o critério de escolha da melhor realização: 1 para a melhor e 2 para a mais próxima da acurácia;
+
+
+chosen_base: 'Artificial'
+realizations: 20
+epochs: 300
+learning_rate: 0.01
+test_size: 0.2
+neuron_type: 'L'
+criterion_choiced: 2

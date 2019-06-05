@@ -1,0 +1,16 @@
+# features: atributos a serem considerados para a base,
+#           podem ser escolhidos: 'sepal length (cm)',
+#                                 'sepal width (cm)',
+#                                 'petal length (cm)',
+#                                 'petal width (cm)';
+# flower_to_classify: indica uma flor que deve ser considerada como 1:
+#                     pode ser: 'setosa',
+#                               'versicolor',
+#                               ou  'virginica';
+
+flower_to_classify: 'setosa'
+features:
+          - 'sepal length (cm)'
+          - 'sepal width (cm)'
+          - 'petal length (cm)'
+          - 'petal width (cm)'
