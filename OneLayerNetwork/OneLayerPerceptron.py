@@ -19,7 +19,13 @@ class OLPerceptron:
                 self.neurons[n].training(new_training_base, epochs=1, learning_rate=learning_rate)
 
     def predict(self, x):
-        exit()
+        y_predict = []
+        n = 0
+        for n_perceptron in self.neurons:
+            y_predict.append(n_perceptron.predict(x))
+            self.u[n] = n_perceptron.u
+            n += 1
+        return y_predict
 
     def hit_rate(self, test_base):
         exit()
