@@ -5,6 +5,7 @@ from operator import add
 class NeuronioMP:
     def __init__(self, nweights=1):
         self.weights = np.random.rand(nweights)
+        self.u = 0
 
     def predict(self, x):
         """
@@ -13,8 +14,8 @@ class NeuronioMP:
         :param x: uma linha com features de x
         :return: 1 se o somatório de ativação for positiva, caso contrário retorna 0;
         """
-        activation = np.dot(self.weights.T, x).sum()
-        return 1 if activation >= 0 else 0
+        self.u = np.dot(self.weights.T, x).sum()
+        return 1 if self.u >= 0 else 0
 
     def training(self, training_base, epochs, learning_rate):
         """
