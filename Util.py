@@ -108,18 +108,24 @@ def artificial_data_p():
     return new_dataset, n_features
 
 
-def load_base(chosen_base):
+def load_base(chosen_base, neuron_type='L'):
+    base = np.array(1)
     if chosen_base == 'Iris':
         print('Carregando configurações para Iris...')
-        return load_iris_dataset()
+        base = load_iris_dataset()
     elif chosen_base == 'Artificial':
         print('Carregando configurações para Artificial..')
-        return artificial_data_p()
+        base = artificial_data_p()
     else:
         print('Base escolhida não é válida.')
         print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')
         exit()
 
+    if neuron_type == 'H':
+        for i in range(base[0].shape[0]):
+            base[0][i, -1] = 1 if base[0][i, -1] == 1 else -1
+
+    return base
 
 def plot_decision_region(realization, configurations, iris_cfg, class_names):
     #plt.rcParams['figure.figsize'] = (10, 7)
