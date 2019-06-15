@@ -5,7 +5,7 @@ import SimplePerceptron.NeuronioPerceptron as perceptron
 class OLPerceptron:
     def __init__(self, n_labels, n_weights):
         self.neurons = [perceptron.NeuronioMP(n_weights) for i in range(n_labels)]
-        self.u = np.array(len(self.neurons))
+        self.u = []
 
     def training(self, epochs, learning_rate, training_base):
         n_labels = len(self.neurons)
@@ -20,11 +20,17 @@ class OLPerceptron:
 
     def predict(self, x):
         y_predict = []
-        n = 0
+        self.u = []
         for n_perceptron in self.neurons:
             y_predict.append(n_perceptron.predict(x))
-            self.u[n] = n_perceptron.u
-            n += 1
+            self.u.append(n_perceptron.u)
+            np.array(y_predict)
+
+        if sum(y_predict) > 1:
+            choiced_label = self.u.index(max(self.u))
+            y_predict = np.zeros(len(self.neurons))
+            y_predict[choiced_label] = 1
+
         return y_predict
 
     def hit_rate(self, test_base):
