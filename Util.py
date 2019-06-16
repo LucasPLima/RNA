@@ -279,7 +279,7 @@ def choose_realization(realizations, criterion_choiced):
         d_means = [abs(accuracy - h) for h in hit_rates]
         nearest_accuracy = min(d_means)
         n = d_means.index(nearest_accuracy)
-        print('Realização mais próxima da acurácia: {}(Taxa de acerto: {}).'.format(n + 1, hit_rates[n]))
+        print('Realização mais próxima da acurácia: {}(Taxa de acerto: {}).'.format(n + 1, round(hit_rates[n], 2)))
 
     return realizations[n]
 

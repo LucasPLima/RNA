@@ -9,10 +9,10 @@
 # epochs: Número máximo de épocas;
 # learning_rate: Taxa de aprendizado;
 # test_size: Porcentagem da base de teste.
-# realization_choose: indica o critério de escolha da melhor realização: 1 para a melhor e 2 para a mais próxima da acurácia;
+# criterion_choose: indica o critério de escolha da melhor realização: 1 para a melhor e 2 para a mais próxima da acurácia;
 
 
-chosen_base: 'Iris'
+chosen_base: 'Artificial'
 neuron_type: 'L'
 realizations: 20
 epochs: 300

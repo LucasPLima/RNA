@@ -50,9 +50,10 @@ class GenericOLN:
         Y_test = test_base[:, -labels:]
 
         y_predict = np.array([self.predict(x) for x in X_test])
-        tst = Y_test - y_predict
         hit = list(filter(lambda x: sum(x) == 0, Y_test - y_predict))
 
         hit_rate = (len(hit)/Y_test.shape[0]) * 100
 
         print('Hit rate:{}%'.format(round(hit_rate, 1)))
+
+        return hit_rate
