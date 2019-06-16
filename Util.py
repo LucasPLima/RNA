@@ -9,22 +9,23 @@ import yaml
 import itertools
 
 
-def prepare_data(base):
+def prepare_data(base, n_labels=1):
     """
         Normaliza e adiciona uma coluna de -1's ao dataset que, posteriormente,
         servirá para incluir o BIAS (w0) na somatória do perceptron.
 
     :param base: dataset que se deseja preparar
+    :param n_labels: quantidade de colunas que representam as classes
     :return: base de dados normalizada e com uma coluna adicional
     """
     base = base.transpose()
-    normalized = [preprocessing.normalize([base[i]], norm='max') for i in range(base.shape[0] - 1)]
+    normalized = [preprocessing.normalize([base[i]], norm='max') for i in range(base.shape[0] - n_labels)]
     normalized = np.array(normalized)
 
     new_base = np.reshape(normalized, (normalized.shape[0], normalized.shape[2]))
     initial_column = -np.ones((new_base.shape[1]))
     new_base = np.vstack([initial_column, new_base])
-    new_base = np.vstack([new_base, base[-1, :]])
+    new_base = np.vstack([new_base, base[(-n_labels):-1, :]])
 
     return new_base.transpose()
 
@@ -107,8 +108,36 @@ def artificial_data_p():
 
     return new_dataset, n_features
 
+
 def load_multiclass_iris(neuron_type):
-    exit()
+    iris = datasets.load_iris()
+    stream = open('configurations/irisConfigurations.yml', 'r', encoding='utf-8').read()
+    iris_cfg = yaml.load(stream=stream, Loader=yaml.FullLoader)
+    n_features = len(iris_cfg['features'])
+
+    attributes = np.array(iris['data'])
+
+    if n_features < 4:
+        chosen_features = list(set(iris_cfg['features']))
+        features_indexes = sorted([iris['feature_names'].index(x) for x in chosen_features])
+        new_attributes = [attributes[:, i] for i in features_indexes]
+        attributes = np.array(new_attributes).T
+
+    n_classes = list(set(iris['target']))
+    targets = np.array(iris['target'])
+
+    multi_bin = preprocessing.LabelBinarizer()
+    multi_bin.fit(n_classes)
+    binarized_labels = np.array(multi_bin.transform(targets))
+
+    if neuron_type == 'H':
+        binarized_labels = np.where(binarized_labels == 0, -1)
+
+    iris_dataset = np.append(attributes, binarized_labels, axis=1)
+    new_dataset = prepare_data(iris_dataset, n_labels=len(iris['target_names']))
+
+    return new_dataset, n_features
+
 
 def load_multiclass_artificial(neuron_type):
     exit()
