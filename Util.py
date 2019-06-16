@@ -140,7 +140,31 @@ def load_multiclass_iris(neuron_type):
 
 
 def load_multiclass_artificial(neuron_type):
-    exit()
+    n_features = 2
+    dataset = np.array([[np.random.uniform(1, 4), y, 1] for y in np.random.uniform(4, 7, 50)])
+    plt.plot(dataset[:, 0], dataset[:, 1], 'ro')
+    dataset = np.append(dataset, [[np.random.uniform(5, 8), y, 2] for y in np.random.uniform(1, 3, 50)], axis=0)
+    plt.plot(dataset[50:-1, 0], dataset[50:-1, 1], 'b*')
+    dataset = np.append(dataset, [[np.random.uniform(9, 11), y, 3] for y in np.random.uniform(4, 7, 50)], axis=0)
+    plt.plot(dataset[100:-1, 0], dataset[100:-1, 1], 'g^')
+
+    plt.axis([0, 12, 0, 8])
+    plt.show()
+
+    new_dataset = prepare_data(dataset)
+
+    targets = new_dataset[:, -1]
+    multi_bin = preprocessing.LabelBinarizer()
+    multi_bin.fit([1, 2, 3])
+    binarized_labels = np.array(multi_bin.transform(targets))
+
+    if neuron_type == 'H':
+        binarized_labels = np.where(binarized_labels == 0, -1, binarized_labels)
+
+    new_dataset = np.delete(new_dataset, -1, axis=1)
+    new_dataset = np.append(new_dataset, binarized_labels, axis=1)
+
+    return new_dataset, n_features
 
 
 def load_multiclass_base(chosen_base, neuron_type='P'):
