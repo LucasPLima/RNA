@@ -25,7 +25,7 @@ def prepare_data(base, n_labels=1):
     new_base = np.reshape(normalized, (normalized.shape[0], normalized.shape[2]))
     initial_column = -np.ones((new_base.shape[1]))
     new_base = np.vstack([initial_column, new_base])
-    new_base = np.vstack([new_base, base[(-n_labels):-1, :]])
+    new_base = np.vstack([new_base, base[(-n_labels):, :]])
 
     return new_base.transpose()
 
@@ -134,7 +134,7 @@ def load_multiclass_iris(neuron_type):
         binarized_labels = np.where(binarized_labels == 0, -1)
 
     iris_dataset = np.append(attributes, binarized_labels, axis=1)
-    new_dataset = prepare_data(iris_dataset, n_labels=len(iris['target_names']))
+    new_dataset = prepare_data(iris_dataset, n_labels=len(n_classes))
 
     return new_dataset, n_features
 
@@ -142,11 +142,12 @@ def load_multiclass_iris(neuron_type):
 def load_multiclass_artificial(neuron_type):
     exit()
 
+
 def load_multiclass_base(chosen_base, neuron_type='P'):
     if chosen_base == 'Iris':
-        load_multiclass_iris(neuron_type)
+        return load_multiclass_iris(neuron_type)
     elif chosen_base == 'Artificial':
-        load_multiclass_artificial(neuron_type)
+        return load_multiclass_artificial(neuron_type)
     else:
         print('Base escolhida não é válida.')
         print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')

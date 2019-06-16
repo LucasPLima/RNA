@@ -10,10 +10,10 @@
 # realization_choose: indica o critério de escolha da melhor realização: 1 para a melhor e 2 para a mais próxima da acurácia;
 
 
-chosen_base: 'Artificial'
+chosen_base: 'Iris'
 realizations: 20
 epochs: 300
 learning_rate: 0.01
 test_size: 0.2
-neuron_type: 'L'
+neuron_type: 'H'
 criterion_choiced: 2

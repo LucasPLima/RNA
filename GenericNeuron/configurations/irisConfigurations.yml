@@ -8,7 +8,7 @@
 #                               'versicolor',
 #                               ou  'virginica';
 
-flower_to_classify: 'setosa'
+flower_to_classify: 'virginica'
 features:
           - 'sepal length (cm)'
           - 'sepal width (cm)'

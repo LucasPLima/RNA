@@ -13,9 +13,9 @@ class OLPerceptron:
             np.random.shuffle(training_base)
             for n in range(n_labels):
                 label_choiced = (n_labels - n) * (-1)
-                Y_training= training_base[:, label_choiced]
-                X_training= training_base[:, 0:(n_labels * -1) - 1]
-                new_training_base = np.append(X_training, Y_training, axis=1)
+                X_training = training_base[:, 0:(n_labels * -1)]
+                Y_training = training_base[:, label_choiced]
+                new_training_base = np.concatenate((X_training, Y_training[:, None]), axis=1)
                 self.neurons[n].training(new_training_base, epochs=1, learning_rate=learning_rate)
 
     def predict(self, x):
@@ -34,4 +34,14 @@ class OLPerceptron:
         return y_predict
 
     def hit_rate(self, test_base):
-        exit()
+        labels = len(self.neurons)
+        X_test = test_base[:, 0:(-labels)]
+        Y_test = test_base[:, -labels:]
+
+        y_predict = np.array([self.predict(x) for x in X_test])
+        tst = Y_test - y_predict
+        hit = list(filter(lambda x: sum(x) == 0, Y_test - y_predict))
+
+        hit_rate = (len(hit)/Y_test.shape[0]) * 100
+
+        print('Hit rate:{}%'.format(round(hit_rate, 1)))
