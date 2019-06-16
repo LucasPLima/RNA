@@ -107,6 +107,22 @@ def artificial_data_p():
 
     return new_dataset, n_features
 
+def load_multiclass_iris(neuron_type):
+    exit()
+
+def load_multiclass_artificial(neuron_type):
+    exit()
+
+def load_multiclass_base(chosen_base, neuron_type='P'):
+    if chosen_base == 'Iris':
+        load_multiclass_iris(neuron_type)
+    elif chosen_base == 'Artificial':
+        load_multiclass_artificial(neuron_type)
+    else:
+        print('Base escolhida não é válida.')
+        print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')
+        exit()
+
 
 def load_base(chosen_base, neuron_type='L'):
     base = np.array(1)
