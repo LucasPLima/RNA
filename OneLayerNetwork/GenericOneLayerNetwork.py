@@ -1,11 +1,19 @@
 import numpy as np
 import SimplePerceptron.NeuronioPerceptron as perceptron
+import GenericNeuron.HiperbolicNeuron as hiperbolic
+import GenericNeuron.LogisticNeuron as logistic
 
 
-class OLPerceptron:
-    def __init__(self, n_labels, n_weights):
-        self.neurons = [perceptron.NeuronioMP(n_weights) for i in range(n_labels)]
+class GenericOLN:
+    def __init__(self, n_labels, n_weights, neuron_type='P'):
+        if neuron_type == 'P':
+            self.neurons = [perceptron.NeuronioMP(n_weights) for i in range(n_labels)]
+        elif neuron_type == 'H':
+            self.neurons = [hiperbolic.HiperbolicNeuron(n_weights) for i in range(n_labels)]
+        elif neuron_type == 'L':
+            self.neurons = [logistic.LogisticNeuron(n_weights) for i in range(n_labels)]
         self.u = []
+        self.neuron_type = neuron_type
 
     def training(self, epochs, learning_rate, training_base):
         n_labels = len(self.neurons)
@@ -26,7 +34,10 @@ class OLPerceptron:
             self.u.append(n_perceptron.u)
             np.array(y_predict)
 
-        if sum(y_predict) > 1:
+        if self.neuron_type != 'P':
+            y_predict = [i[0] for i in y_predict]
+
+        if y_predict.count(1) > 1:
             choiced_label = self.u.index(max(self.u))
             y_predict = np.zeros(len(self.neurons))
             y_predict[choiced_label] = 1

@@ -2,6 +2,9 @@
 # com base nas configurações desejadas
 
 # chosen_base: 'Iris' ou 'Artificial';
+# neuron_type: Indica o neurônio utilizado na rede, pode ser 'P' para Perceptron, 'H' para
+#              neurônio com função de ativação hiperbólica e 'L' neurônio com função de ati-
+#              vação logística;
 # realizations: Número máximo de realizações;
 # epochs: Número máximo de épocas;
 # learning_rate: Taxa de aprendizado;
@@ -10,8 +13,9 @@
 
 
 chosen_base: 'Iris'
+neuron_type: 'L'
 realizations: 20
 epochs: 300
-learning_rate: 0.1
+learning_rate: 0.01
 test_size: 0.2
 criterion_choiced: 2

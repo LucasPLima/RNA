@@ -8,10 +8,10 @@ class HiperbolicNeuron:
     def __init__(self, n_weights):
         self.weights = np.random.rand(n_weights, 1)
         self.cost = []
-        self.u = np.array(1)
+        self.u = np.array(0)
 
-    def training(self, training_base, n_epochs, learning_rate):
-        for i in range(n_epochs):
+    def training(self, training_base, epochs, learning_rate):
+        for i in range(epochs):
             np.random.shuffle(training_base)
             X = np.delete(training_base, -1, 1)
             Y = training_base[:, -1]

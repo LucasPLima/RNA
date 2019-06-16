@@ -27,7 +27,7 @@ def main():
         elif configurations['neuron_type'] == 'H':
             generic_neuron = hiperbolicNeuron.HiperbolicNeuron(n_weights=n_features + 1)
 
-        generic_neuron.training(training_base=training_base, learning_rate=learning_rate, n_epochs=epochs)
+        generic_neuron.training(training_base=training_base, learning_rate=learning_rate, epochs=epochs)
         generic_neuron.hit_rate(test_base)
         end = time.time()
         total_time += (end-start)

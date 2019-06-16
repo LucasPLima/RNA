@@ -131,7 +131,7 @@ def load_multiclass_iris(neuron_type):
     binarized_labels = np.array(multi_bin.transform(targets))
 
     if neuron_type == 'H':
-        binarized_labels = np.where(binarized_labels == 0, -1)
+        binarized_labels = np.where(binarized_labels == 0, -1, binarized_labels)
 
     iris_dataset = np.append(attributes, binarized_labels, axis=1)
     new_dataset = prepare_data(iris_dataset, n_labels=len(n_classes))

@@ -5,7 +5,7 @@
 #                                 'petal width (cm)';
 
 features:
-          #- 'sepal length (cm)'
+          - 'sepal length (cm)'
           - 'sepal width (cm)'
-          #- 'petal length (cm)'
+          - 'petal length (cm)'
           - 'petal width (cm)'
