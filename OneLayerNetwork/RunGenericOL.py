@@ -19,7 +19,9 @@ def main():
     total_time = 0
     for i in range(realizations):
         start = time.time()
-        training_base, test_base = train_test_split(dataset, test_size=settings['test_size'])
+        training_base, test_base = train_test_split(dataset, test_size=settings['test_size'], stratify=dataset[:, -1])
+        training_base = ut.binarize_labels(training_base, neuron_type)
+        test_base = ut.binarize_labels(test_base, neuron_type)
 
         perceptron_net = olp.GenericOLN(n_labels=3, n_weights=n_features + 1, neuron_type=neuron_type)
         perceptron_net.training(epochs=epochs, learning_rate=learning_rate, training_base=training_base)

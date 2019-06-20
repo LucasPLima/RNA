@@ -108,6 +108,22 @@ def artificial_data_p():
 
     return new_dataset, n_features
 
+def binarize_labels(dataset, neuron_type='L'):
+    labels = dataset[:, -1]
+    classes = list(set(labels))
+
+    multi_bin = preprocessing.LabelBinarizer()
+    multi_bin.fit(classes)
+    binarized_labels = np.array(multi_bin.transform(labels))
+
+    if neuron_type == 'H':
+        binarized_labels = np.where(binarized_labels == 0, -1, binarized_labels)
+
+    new_dataset = np.delete(dataset, -1, axis=1)
+    new_dataset = np.append(new_dataset, binarized_labels, axis=1)
+
+    return new_dataset
+
 
 def load_multiclass_iris(neuron_type):
     iris = datasets.load_iris()
@@ -123,23 +139,23 @@ def load_multiclass_iris(neuron_type):
         new_attributes = [attributes[:, i] for i in features_indexes]
         attributes = np.array(new_attributes).T
 
-    n_classes = list(set(iris['target']))
-    targets = np.array(iris['target'])
+    # n_classes = list(set(iris['target']))
+    labels = np.array(iris['target'])
+    #
+    # multi_bin = preprocessing.LabelBinarizer()
+    # multi_bin.fit(n_classes)
+    # binarized_labels = np.array(multi_bin.transform(targets))
+    #
+    # if neuron_type == 'H':
+    #     binarized_labels = np.where(binarized_labels == 0, -1, binarized_labels)
 
-    multi_bin = preprocessing.LabelBinarizer()
-    multi_bin.fit(n_classes)
-    binarized_labels = np.array(multi_bin.transform(targets))
-
-    if neuron_type == 'H':
-        binarized_labels = np.where(binarized_labels == 0, -1, binarized_labels)
-
-    iris_dataset = np.append(attributes, binarized_labels, axis=1)
-    new_dataset = prepare_data(iris_dataset, n_labels=len(n_classes))
+    iris_dataset = np.append(attributes, labels[:, None], axis=1)
+    new_dataset = prepare_data(iris_dataset)
 
     return new_dataset, n_features
 
 
-def load_multiclass_artificial(neuron_type):
+def load_multiclass_artificial():
     n_features = 2
     dataset = np.array([[np.random.uniform(1, 4), y, 1] for y in np.random.uniform(4, 7, 50)])
     plt.plot(dataset[:, 0], dataset[:, 1], 'ro')
@@ -153,17 +169,6 @@ def load_multiclass_artificial(neuron_type):
 
     new_dataset = prepare_data(dataset)
 
-    targets = new_dataset[:, -1]
-    multi_bin = preprocessing.LabelBinarizer()
-    multi_bin.fit([1, 2, 3])
-    binarized_labels = np.array(multi_bin.transform(targets))
-
-    if neuron_type == 'H':
-        binarized_labels = np.where(binarized_labels == 0, -1, binarized_labels)
-
-    new_dataset = np.delete(new_dataset, -1, axis=1)
-    new_dataset = np.append(new_dataset, binarized_labels, axis=1)
-
     return new_dataset, n_features
 
 
@@ -171,7 +176,7 @@ def load_multiclass_base(chosen_base, neuron_type='P'):
     if chosen_base == 'Iris':
         return load_multiclass_iris(neuron_type)
     elif chosen_base == 'Artificial':
-        return load_multiclass_artificial(neuron_type)
+        return load_multiclass_artificial()
     else:
         print('Base escolhida não é válida.')
         print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')
