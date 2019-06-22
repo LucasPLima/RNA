@@ -157,14 +157,14 @@ def load_multiclass_iris(neuron_type):
 
 def load_multiclass_artificial():
     n_features = 2
-    dataset = np.array([[np.random.uniform(1, 4), y, 1] for y in np.random.uniform(4, 7, 50)])
+    dataset = np.array([[np.random.uniform(1, 3), y, 1] for y in np.random.uniform(4, 6, 50)])
     plt.plot(dataset[:, 0], dataset[:, 1], 'ro')
-    dataset = np.append(dataset, [[np.random.uniform(5, 8), y, 2] for y in np.random.uniform(1, 3, 50)], axis=0)
+    dataset = np.append(dataset, [[np.random.uniform(4, 6), y, 2] for y in np.random.uniform(1, 3, 50)], axis=0)
     plt.plot(dataset[50:-1, 0], dataset[50:-1, 1], 'b*')
-    dataset = np.append(dataset, [[np.random.uniform(9, 11), y, 3] for y in np.random.uniform(4, 7, 50)], axis=0)
+    dataset = np.append(dataset, [[np.random.uniform(7, 9), y, 3] for y in np.random.uniform(4, 6, 50)], axis=0)
     plt.plot(dataset[100:-1, 0], dataset[100:-1, 1], 'g^')
 
-    plt.axis([0, 12, 0, 8])
+    plt.axis([0, 10, 0, 8])
     plt.show()
 
     new_dataset = prepare_data(dataset)
@@ -262,6 +262,7 @@ def choose_realization(realizations, criterion_choiced):
     :param criterion_choiced: opção de escolha da melhor realização
                             1 - para a taxa de acerto mais alta
                             2 - para a taxa de acerto mais próxima da acurácia
+                            3 - para a taxa de acerto mais baixa
     :return: a melhor realização com base na taxa de acerto média;
     """
     accuracy = 0
@@ -280,11 +281,15 @@ def choose_realization(realizations, criterion_choiced):
         best_result = max(hit_rates)
         n = hit_rates.index(best_result)
         print('Melhor realização: {} (Taxa de acerto: {}).'.format(n + 1, hit_rates[n]))
-    else:
+    elif criterion_choiced == 2:
         d_means = [abs(accuracy - h) for h in hit_rates]
         nearest_accuracy = min(d_means)
         n = d_means.index(nearest_accuracy)
         print('Realização mais próxima da acurácia: {}(Taxa de acerto: {}).'.format(n + 1, round(hit_rates[n], 2)))
+    else:
+        worst_result = min(hit_rates)
+        n = hit_rates.index(worst_result)
+        print('Pior realização: {} (Taxa de acerto: {})'.format(n+1, hit_rates[n]))
 
     return realizations[n]
 
