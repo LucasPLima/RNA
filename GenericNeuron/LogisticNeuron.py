@@ -7,6 +7,7 @@ class LogisticNeuron:
         self.weights = np.random.rand(n_weights, 1)
         self.cost = []
         self.u = np.array(0)
+        self.error = 0
 
     def training(self, training_base, epochs, learning_rate):
         for i in range(epochs):
