@@ -1,6 +1,8 @@
 from sklearn.model_selection import train_test_split
 import SimplePerceptron.NeuronioPerceptron as ps
-import Util as ut
+import plot_utils as plt_ut
+import datasets
+import log_utils
 import time
 import yaml
 
@@ -9,7 +11,7 @@ def main():
     stream = open('configurations/runConfigurations.yml', 'r', encoding='utf-8').read()
     configurations = yaml.load(stream=stream, Loader=yaml.FullLoader)
 
-    base, n_features = ut.load_base(configurations['chosen_base'])
+    base, n_features = datasets.load_base(configurations['chosen_base'])
 
     learning_rate = configurations['learning_rate']
     iterations = configurations['realizations']
@@ -40,8 +42,8 @@ def main():
     print('-----------------Statistics--------------------')
     print('Mean execution time: {}'.format(total_time/iterations))
     print('Mean epochs: {}'.format(round(m_epochs/iterations)))
-    best_realization = ut.choose_realization(realizations, configurations['criterion_choiced'])
-    ut.plot_results(best_realization, configurations)
+    best_realization = log_utils.choose_realization(realizations, configurations['criterion_choiced'])
+    plt_ut.plot_results(best_realization, configurations)
 
 
 if __name__ == '__main__':

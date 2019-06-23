@@ -1,6 +1,7 @@
 import yaml
 import time
-import Util as ut
+import plot_utils as plt_ut
+import datasets
 import GenericNeuron.LogisticNeuron as logisticNeuron
 import GenericNeuron.HiperbolicNeuron as hiperbolicNeuron
 from sklearn.model_selection import train_test_split
@@ -10,7 +11,7 @@ def main():
     stream = open('configurations/runConfigurations.yml', 'r', encoding='utf-8').read()
     configurations = yaml.load(stream=stream, Loader=yaml.FullLoader)
 
-    base, n_features = ut.load_base(configurations['chosen_base'], configurations['neuron_type'])
+    base, n_features = datasets.load_base(configurations['chosen_base'], configurations['neuron_type'])
 
     realizations = configurations['realizations']
     learning_rate = configurations['learning_rate']
@@ -31,14 +32,6 @@ def main():
         generic_neuron.hit_rate(test_base)
         end = time.time()
         total_time += (end-start)
-        '''
-        scenarios.append({'MSE': mse,
-                             'RMSE':rmse,
-                             'weights':AdalineGD.weights,
-                             'cost': AdalineGD.cost,
-                             'training_base':training_base,
-                             'test_base': test_base})
-        '''
 
     print('\n--------Statistics---------')
     print('Mean execution time: {}'.format(total_time/realizations))

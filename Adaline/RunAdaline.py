@@ -1,5 +1,6 @@
 from sklearn.model_selection import train_test_split
-import Util as ut
+import plot_utils as plt_ut
+import datasets
 import numpy as np
 import Adaline.GradientDescendentAdaline as gd
 import time
@@ -11,10 +12,10 @@ def main():
     configurations = yaml.load(stream=stream, Loader=yaml.FullLoader)
 
     # linear model 1: z = 2x + 3 + noise
-    base = ut.create_linear_model(n_variables=configurations['n_variables'],
-                                  l_coeficients=configurations['coeficients'],
-                                  n_samples=configurations['n_samples'],
-                                  normalize= bool(configurations['normalize']))
+    base = datasets.create_linear_model(n_variables=configurations['n_variables'],
+                                        l_coeficients=configurations['coeficients'],
+                                        n_samples=configurations['n_samples'],
+                                        normalize= bool(configurations['normalize']))
 
     iterations = configurations['realizations']
     learning_rate = configurations['learning_rate']
@@ -44,7 +45,7 @@ def main():
     print('\n--------Statistics---------')
     print('Mean execution time: {}'.format(total_time/iterations))
     realization = choose_best_realization(realizations)
-    ut.plot_adaline_results(realization, bool(configurations['normalize']))
+    plt_ut.plot_adaline_results(realization, bool(configurations['normalize']))
 
 
 def choose_best_realization(realizations):

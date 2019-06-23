@@ -14,10 +14,13 @@ class GenericOLN:
             self.neurons = [logistic.LogisticNeuron(n_weights) for i in range(n_labels)]
         self.u = []
         self.neuron_type = neuron_type
+        self.weights = [[] for i in range(n_labels)]
+        self.epochs_error = []
 
     def training(self, epochs, learning_rate, training_base):
         n_labels = len(self.neurons)
-        for i in range(epochs):
+        for epoch in range(epochs):
+            error = 0
             np.random.shuffle(training_base)
             for n in range(n_labels):
                 label_choiced = (n_labels - n) * (-1)
@@ -25,13 +28,19 @@ class GenericOLN:
                 Y_training = training_base[:, label_choiced]
                 new_training_base = np.concatenate((X_training, Y_training[:, None]), axis=1)
                 self.neurons[n].training(new_training_base, epochs=1, learning_rate=learning_rate)
+                error += self.neurons[n].cost[epoch]
+                self.weights[n] = np.array(self.neurons[n].weights)
+            self.epochs_error.append(error)
+
+            if error == 0:
+                return
 
     def predict(self, x):
         y_predict = []
         self.u = []
-        for n_perceptron in self.neurons:
-            y_predict.append(n_perceptron.predict(x))
-            self.u.append(n_perceptron.u)
+        for neuron in self.neurons:
+            y_predict.append(neuron.predict(x))
+            self.u.append(neuron.u)
             np.array(y_predict)
 
         if self.neuron_type != 'P':
@@ -50,10 +59,9 @@ class GenericOLN:
         Y_test = test_base[:, -labels:]
 
         y_predict = np.array([self.predict(x) for x in X_test])
+        test = Y_test - y_predict
         hit = list(filter(lambda x: sum(x) == 0, Y_test - y_predict))
 
         hit_rate = (len(hit)/Y_test.shape[0]) * 100
 
-        print('Hit rate:{}%'.format(round(hit_rate, 1)))
-
-        return hit_rate
+        return hit_rate, y_predict
