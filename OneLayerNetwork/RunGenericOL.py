@@ -1,8 +1,5 @@
 import OneLayerNetwork.GenericOneLayerNetwork as olp
-import plot_utils as plt_ut
-import dataset_utils
-import log_utils
-import datasets
+from Utils import plot_utils as plt_ut, datasets, log_utils, dataset_utils
 import time
 import yaml
 from copy import deepcopy
@@ -26,7 +23,7 @@ def main():
     total_time = 0
     for i in range(realizations):
         start = time.time()
-        training_base, test_base = train_test_split(dataset, test_size=settings['test_size'], stratify=dataset[:, -1])
+        training_base, test_base = train_test_split(dataset, test_size=settings['test_size'],stratify=dataset[:, -1])
         training_base = dataset_utils.binarize_labels(training_base, neuron_type)
         test_base = dataset_utils.binarize_labels(test_base, neuron_type)
 

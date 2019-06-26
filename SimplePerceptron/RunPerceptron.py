@@ -1,8 +1,6 @@
 from sklearn.model_selection import train_test_split
 import SimplePerceptron.NeuronioPerceptron as ps
-import plot_utils as plt_ut
-import datasets
-import log_utils
+from Utils import plot_utils as plt_ut, datasets, log_utils
 import time
 import yaml
 

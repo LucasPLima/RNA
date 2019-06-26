@@ -1,7 +1,6 @@
 import yaml
 import time
-import plot_utils as plt_ut
-import datasets
+from Utils import datasets
 import GenericNeuron.LogisticNeuron as logisticNeuron
 import GenericNeuron.HiperbolicNeuron as hiperbolicNeuron
 from sklearn.model_selection import train_test_split

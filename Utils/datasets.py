@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import dataset_utils
+from Utils import dataset_utils
 import itertools
 import yaml
 from sklearn import preprocessing, datasets

@@ -1,7 +1,7 @@
 import SimplePerceptron.NeuronioPerceptron as ps
 import matplotlib.pyplot as plt
 import numpy as np
-import dataset_utils
+from Utils import dataset_utils
 import yaml
 import itertools
 
@@ -197,13 +197,14 @@ def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type)
     plot_step = 0.01
 
     generic_ol_net = realization['ol_net']
-    base = realization['test_base']
+    base = np.append(realization['training_base'], realization['test_base'], axis=0)
+    X_test = realization['test_base'][:, 0:(-n_classes)]
     X_sample = base[:, 0:(-n_classes)]
     Y_sample = dataset_utils.convert_labels(base[:, -n_classes:], n_classes)
 
     if X_sample.shape[1] == 3:
-        x_min, x_max = X_sample[:, 1].min() - 1, X_sample[:, 1].max() + 1
-        y_min, y_max = X_sample[:, 2].min() - 1, X_sample[:, 2].max() + 1
+        x_min, x_max = X_sample[:, 1].min() - 0.5, X_sample[:, 1].max() + 0.5
+        y_min, y_max = X_sample[:, 2].min() - 0.5, X_sample[:, 2].max() + 0.5
         xx, yy = np.meshgrid(np.arange(x_min, x_max, plot_step),
                              np.arange(y_min, y_max, plot_step))
 
@@ -232,7 +233,11 @@ def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type)
         for i, color in zip(range(n_classes), plot_colors):
             idx = np.where(Y_sample == i)
             plt.scatter(X_sample[idx, 1], X_sample[idx, 2], c=color, label=classes[i],
-                        edgecolor='black', s=15)
+                        edgecolor='black', s=25)
+
+        for i in range(X_test.shape[0]):
+            plt.plot(X_test[i, 1], X_test[i, 2], 'ko', fillstyle='none', markersize=8)
+
         plt.savefig('plots/{}_{}_decision_region.png'.format(choosen_base, neuron_type))
         plt.show()
     else:

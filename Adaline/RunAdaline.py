@@ -1,6 +1,5 @@
 from sklearn.model_selection import train_test_split
-import plot_utils as plt_ut
-import datasets
+from Utils import plot_utils as plt_ut, datasets
 import numpy as np
 import Adaline.GradientDescendentAdaline as gd
 import time

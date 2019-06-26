@@ -12,13 +12,13 @@
 # criterion_choose: indica o critério de escolha da melhor realização:
 #                      1 para a melhor;
 #                      2 para a mais próxima da acurácia;
-#                      3 para a pior.
+#                      3 para a pior;
 
 
 chosen_base: 'Iris'
-neuron_type: 'L'
+neuron_type: 'P'
 realizations: 20
 epochs: 300
 learning_rate: 0.01
 test_size: 0.2
-criterion_choiced: 2
+criterion_choiced: 1

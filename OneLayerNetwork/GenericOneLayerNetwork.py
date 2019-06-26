@@ -32,8 +32,8 @@ class GenericOLN:
                 self.weights[n] = np.array(self.neurons[n].weights)
             self.epochs_error.append(error)
 
-            if error == 0:
-                return
+            #if error == 0:
+             #   return
 
     def predict(self, x):
         y_predict = []
