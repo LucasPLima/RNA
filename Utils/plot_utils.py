@@ -182,11 +182,16 @@ def plot_epochs_error(realization, chosen_base, neuron_type):
     epochs = [i+1 for i in epochs]
 
     ax = plt.gca()
-    plt.plot(epochs, ol_net.epochs_error)
 
-    ax.set(xlabel='Epochs', ylabel='Total error',
-           title='Total error per epoch.')
+    colors = 'ryb'
+    for i in range(len(ol_net.neurons)):
+        plt.plot(epochs, ol_net.neurons[i].cost, label='Neuron {}'.format(i+1),
+                 color=colors[i], linewidth=2.5)
+
+    ax.set(xlabel='Epochs', ylabel='Error',
+           title='Total cost per epoch.')
     ax.grid()
+    ax.legend()
     plt.savefig('plots/{}_{}_epochs_error.png'.format(chosen_base, neuron_type))
     plt.show()
 
@@ -234,6 +239,7 @@ def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type)
             idx = np.where(Y_sample == i)
             plt.scatter(X_sample[idx, 1], X_sample[idx, 2], c=color, label=classes[i],
                         edgecolor='black', s=25)
+        plt.legend()
 
         for i in range(X_test.shape[0]):
             plt.plot(X_test[i, 1], X_test[i, 2], 'ko', fillstyle='none', markersize=8)
