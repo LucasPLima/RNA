@@ -17,5 +17,17 @@ class Layer:
         self.layer_output = output
         return output
 
-    def calc_layer_error(self):
-        pass
+    def calc_layer_error(self, desired_output=None, forward_layer= None):
+        if desired_output is not None:
+            for i in range(len(self.neurons)):
+                self.layer_error.append(desired_output[i] - self.layer_output[i])
+        else:
+            pass
+
+    def adjust_neurons(self, learning_rate):
+        if self.is_output_layer:
+            for i in range(len(self.neurons)):
+                self.neurons[i].adjust_weights(error=self.layer_error[i],
+                                               learning_rate=learning_rate)
+        else:
+            pass
