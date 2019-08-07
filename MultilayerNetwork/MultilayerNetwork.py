@@ -4,7 +4,10 @@ from MultilayerNetwork.Layer import Layer
 
 
 class MLP:
-    def __init__(self, n_layers, n_neurons, n_features, hidden_layer_func='Logistic'):
+    def __init__(self, n_layers,
+                 n_neurons,
+                 n_features,
+                 hidden_layer_func='Logistic'):
         self.n_layers = n_layers
         self.n_features = n_features
         self.layers = [Layer(is_output_layer=False, nu_neurons=n_neurons[0], nu_features=self.n_features)]
@@ -32,12 +35,11 @@ class MLP:
     def back_propagation_adjust(self, desired_output, learning_rate):
         layers_r = copy.deepcopy(self.layers)
         layers_r.reverse()
-        for layer in layers_r:
-            if layer.is_output_layer:
-                layer.calc_layer_error(desired_output)
+        for i in range(len(layers_r)):
+            if layers_r[i].is_output_layer:
+                layers_r[i].calc_layer_error(desired_output)
             else:
                 # TODO
-                # Lembrar que a lista de layers é reversa, layer_forward deve ser (layer atual - 1)
-                pass
-            layer.adjust_neurons(learning_rate)
+                layers_r[i].calc_layer_error(layers_r[i-1])
+            layers_r[i].adjust_neurons(learning_rate)
 
