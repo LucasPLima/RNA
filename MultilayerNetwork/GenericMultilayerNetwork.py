@@ -37,7 +37,6 @@ class MLP:
             if self.layers[i].is_output_layer:
                 self.layers[i].calc_layer_error(desired_output=desired_output)
             else:
-                # TODO
-                self.layers[i].calc_layer_error(forward_layer=self.layers[i-1])
+                self.layers[i].calc_layer_error(previous_layer=self.layers[i+1])
             self.layers[i].adjust_neurons(learning_rate)
 
