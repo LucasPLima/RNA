@@ -1,6 +1,6 @@
 import numpy as np
 import copy
-from MultilayerNetwork.Layer import Layer
+from .Layer import Layer
 
 
 class MLP:
@@ -21,8 +21,8 @@ class MLP:
         for i in range(epochs):
             np.random.shuffle(training_base)
             for sample in training_base:
-                x_training = sample[:self.n_features]
-                y_training = sample[self.n_features:]
+                x_training = sample[:self.n_features+1]
+                y_training = sample[self.n_features+1:]
                 self.forward_propagation(x_training)
                 self.back_propagation_adjust(y_training, learning_rate)
 
@@ -33,13 +33,11 @@ class MLP:
             new_input = output_data
 
     def back_propagation_adjust(self, desired_output, learning_rate):
-        layers_r = copy.deepcopy(self.layers)
-        layers_r.reverse()
-        for i in range(len(layers_r)):
-            if layers_r[i].is_output_layer:
-                layers_r[i].calc_layer_error(desired_output)
+        for i in range(len(self.layers)-1, -1, -1):
+            if self.layers[i].is_output_layer:
+                self.layers[i].calc_layer_error(desired_output=desired_output)
             else:
                 # TODO
-                layers_r[i].calc_layer_error(layers_r[i-1])
-            layers_r[i].adjust_neurons(learning_rate)
+                self.layers[i].calc_layer_error(forward_layer=self.layers[i-1])
+            self.layers[i].adjust_neurons(learning_rate)
 

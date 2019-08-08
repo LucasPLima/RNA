@@ -1,4 +1,4 @@
-from MultilayerNetwork.LogisticNeuron import LogisticNeuronML
+from .LogisticNeuron import LogisticNeuronML
 
 
 class Layer:
@@ -10,7 +10,7 @@ class Layer:
         self.layer_output = []
 
     def forward_process(self, data_input):
-        output = []
+        output = [-1]
         for neuron in self.neurons:
             neuron.process_inputs(data_input)
             output.append(neuron.output)
@@ -21,12 +21,13 @@ class Layer:
         self.layer_error = []
         if desired_output is not None:
             for i in range(len(self.neurons)):
-                self.layer_error.append(desired_output[i] - self.layer_output[i])
+                self.layer_error.append(desired_output[i] - self.layer_output[i+1])
         else:
             for i in range(len(self.neurons)):
                 error = 0
-                for n in range(forward_layer.neurons):
-                    error += forward_layer[n].weights[i+1] * forward_layer.layer_error[n] * forward_layer[n].d_y
+                for n in range(len(forward_layer.neurons)):
+                    error += forward_layer.neurons[n].weights[i+1] * forward_layer.layer_error[n] \
+                             * forward_layer.neurons[n].d_y
                 self.layer_error.append(error)
 
     def adjust_neurons(self, learning_rate):
