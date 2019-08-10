@@ -1,10 +1,12 @@
 import numpy as np
 from math import exp
+from operator import add
 
 
 class LogisticNeuron:
     def __init__(self, n_weights):
         self.weights = np.random.rand(n_weights, 1)
+        self.total_error = 0
         self.cost = []
         self.u = np.array(0)
         self.error = 0
@@ -29,6 +31,16 @@ class LogisticNeuron:
 
             if cost == 0:
                 break
+
+    def training_net(self, x, learning_rate):
+        def derivative_calc(y): return y * (1 - y)
+        features = x[:-1]
+        label = x[-1]
+        prediction = self.predict(features)
+        error = label - prediction
+        y_calc = derivative_calc(self.logistic_activation(self.u))
+        self.weights += np.array(learning_rate * error * y_calc * features).reshape((self.weights.shape[0], 1))
+        self.total_error += error ** 2
 
     def calc_u(self, X):
         self.u = np.dot(X, self.weights)

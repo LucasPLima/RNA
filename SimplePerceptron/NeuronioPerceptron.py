@@ -6,6 +6,7 @@ class NeuronioMP:
     def __init__(self, nweights=1):
         self.weights = np.random.rand(nweights)
         self.u = 0
+        self.total_error = 0
         self.cost = []
 
     def predict(self, x):
@@ -44,6 +45,15 @@ class NeuronioMP:
             if total_error == 0:
                 break
         return epoch + 1
+
+    def training_net(self, x, learning_rate):
+        features = x[:-1]
+        label = x[-1]
+        prediction = self.predict(features)
+        error = label - prediction
+        delta_w = np.array(learning_rate * error * features)
+        self.weights = np.array(list(map(add, self.weights, delta_w)))
+        self.total_error += error ** 2
 
     def hit_rate(self, test_base):
         """
