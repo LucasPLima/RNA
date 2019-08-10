@@ -8,7 +8,7 @@ class LogisticNeuronML:
         self.u = 0
         self.d_y = 0
         self.output = 0
-        self.weights = np.random.random(n_weights + 1)
+        self.weights = np.random.random(n_weights)
 
     # TODO
     # Lembrar da saída / erro pertence aos reais/ não classificar
