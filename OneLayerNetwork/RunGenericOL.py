@@ -28,7 +28,7 @@ def main():
         test_base = dataset_utils.binarize_labels(test_base, neuron_type)
 
         one_layer_net = olp.GenericOLN(n_labels=n_labels, n_weights=n_features + 1, neuron_type=neuron_type)
-        one_layer_net.training(epochs=epochs, learning_rate=learning_rate, training_base=training_base)
+        one_layer_net.new_training(epochs=epochs, learning_rate=learning_rate, training_base=training_base)
         hit_rate, predict = one_layer_net.hit_rate(test_base)
 
         end = time.time()

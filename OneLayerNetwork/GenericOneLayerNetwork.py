@@ -14,7 +14,7 @@ class GenericOLN:
             self.neurons = [logistic.LogisticNeuron(n_weights) for i in range(n_labels)]
         self.u = []
         self.neuron_type = neuron_type
-        self.weights = [[] for i in range(n_labels)]
+        self.weights = []
         self.epochs_error = []
 
     def training(self, epochs, learning_rate, training_base):
@@ -32,8 +32,28 @@ class GenericOLN:
                 self.weights[n] = np.array(self.neurons[n].weights)
             self.epochs_error.append(error)
 
-            #if error == 0:
-             #   return
+    def new_training(self, epochs, learning_rate, training_base):
+        n_labels = len(self.neurons)
+        for epoch in range(epochs):
+            np.random.shuffle(training_base)
+            for pattern in training_base:
+                for n in range(n_labels):
+                    label_choiced = (n_labels - n) * (-1)
+                    x = pattern[0:(n_labels * -1)]
+                    y = pattern[label_choiced]
+                    new_pattern = np.append(x, y)
+                    self.neurons[n].training_net(new_pattern, learning_rate=learning_rate)
+
+            self.restart_errors()
+            self.weights = np.array([self.neurons[n].weights for n in range(len(self.neurons))])
+
+    def restart_errors(self):
+        net_error = 0
+        for neuron in self.neurons:
+            net_error += neuron.total_error
+            neuron.cost.append(neuron.total_error)
+            neuron.total_error = 0
+        self.epochs_error.append(net_error)
 
     def predict(self, x):
         y_predict = []
