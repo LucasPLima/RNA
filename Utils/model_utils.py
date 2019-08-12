@@ -14,10 +14,9 @@ def hit_rate(predicted_labels, desired_labels, activations=None):
     hit = []
     for i in range(len(predicted_labels)):
         validate_predict(predicted_labels[i], activations[i])
-        error = sum(desired_labels[i] - predicted_labels[i])
-        if error == 0:
+        error = desired_labels[i] - predicted_labels[i]
+        if sum(error**2) == 0:
             hit.append(1)
-        #hit = list(filter(lambda x: sum(x) == 0, ))
 
     rate = (len(hit) / desired_labels.shape[0]) * 100
-    print('Hit Rate: {}%'.format(rate))
+    print('Hit Rate: {}%'.format(round(rate, 2)))

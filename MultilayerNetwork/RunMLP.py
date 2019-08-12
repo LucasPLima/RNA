@@ -8,13 +8,13 @@ def main():
     dataset, n_features = datasets.load_multiclass_base('Iris')
     n_labels = len(list(set(dataset[:, -1])))
     epochs = 200
-    learning_rate = 0.02
+    learning_rate = 0.1
     training_base, test_base = train_test_split(dataset, test_size=0.2, stratify=dataset[:, -1])
     training_base = dataset_utils.binarize_labels(training_base)
     test_base = dataset_utils.binarize_labels(test_base)
     print('Mlp iniciado')
     start = time.time()
-    mlp_test = MLP(n_layers=2, n_neurons=[9, n_labels], n_features=n_features)
+    mlp_test = MLP(n_layers=2, n_neurons=[5, n_labels], n_features=n_features)
     mlp_test.training(training_base, epochs, learning_rate)
     end = time.time()
     total_time = (end - start)

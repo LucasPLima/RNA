@@ -13,7 +13,7 @@ class LogisticNeuronML:
     def process_inputs(self, x):
         self.x = x
         self.u = np.dot(self.weights.T, x)
-        self.output = 1 / (1 + exp(self.u))
+        self.output = 1 / (1 + exp(-self.u))
         self.d_y = self.output * (1 - self.output)
 
     def adjust_weights(self, error, learning_rate):
