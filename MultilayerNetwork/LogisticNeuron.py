@@ -10,8 +10,6 @@ class LogisticNeuronML:
         self.output = 0
         self.weights = np.random.random(n_weights)
 
-    # TODO
-    # Lembrar da saída / erro pertence aos reais/ não classificar
     def process_inputs(self, x):
         self.x = x
         self.u = np.dot(self.weights.T, x)
@@ -21,7 +19,8 @@ class LogisticNeuronML:
     def adjust_weights(self, error, learning_rate):
         self.weights = self.weights + np.dot((learning_rate * error * self.d_y), self.x)
 
-    # TODO
-    # Não utilizar durante o treino
     def predict(self):
-        pass
+        if self.output >= 0.5:
+            return 1
+        else:
+            return 0

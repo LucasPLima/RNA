@@ -1,5 +1,5 @@
 from MultilayerNetwork.GenericMultilayerNetwork import MLP
-from Utils import datasets, dataset_utils
+from Utils import datasets, dataset_utils, model_utils
 import time
 from sklearn.model_selection import train_test_split
 
@@ -14,16 +14,12 @@ def main():
     test_base = dataset_utils.binarize_labels(test_base)
     print('Mlp iniciado')
     start = time.time()
-    mlp_test = MLP(n_layers=2, n_neurons=[5, n_labels], n_features=n_features)
-    print('Pesos Iniciais')
-    for neuron in mlp_test.layers[-1].neurons:
-        print(neuron.weights)
+    mlp_test = MLP(n_layers=2, n_neurons=[9, n_labels], n_features=n_features)
     mlp_test.training(training_base, epochs, learning_rate)
-    print('Pesos Finais')
-    for neuron in mlp_test.layers[-1].neurons:
-        print(neuron.weights)
     end = time.time()
     total_time = (end - start)
+    predicted_labels, activations = mlp_test.predict(test_base)
+    model_utils.hit_rate(predicted_labels, test_base[:, n_features+1:], activations)
     print('Mlp treinado, tempo:{}'.format(total_time))
 
 

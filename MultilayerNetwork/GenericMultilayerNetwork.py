@@ -40,3 +40,16 @@ class MLP:
                 self.layers[i].calc_layer_error(previous_layer=self.layers[i+1])
             self.layers[i].adjust_neurons(learning_rate)
 
+    def predict(self, test_base):
+        predicted_labels = []
+        neuron_activations = []
+        for sample in test_base:
+            x_test = sample[:self.n_features+1]
+            self.forward_propagation(x_test)
+            predict = [neuron.predict() for neuron in self.layers[-1].neurons]
+            u_s = [neuron.u for neuron in self.layers[-1].neurons]
+            neuron_activations.append(u_s)
+            predicted_labels.append(predict)
+
+        return predicted_labels, neuron_activations
+
