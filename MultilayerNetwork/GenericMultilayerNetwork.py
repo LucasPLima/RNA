@@ -1,6 +1,6 @@
 import numpy as np
-import copy
 from .Layer import Layer
+from Utils import model_utils
 
 
 class MLP:
@@ -17,8 +17,12 @@ class MLP:
             else:
                 self.layers.append(Layer(is_output_layer=True, nu_neurons=n_neurons[i], nu_features=n_neurons[i-1]))
 
-    def training(self, training_base, epochs, learning_rate):
+    def training(self, training_base, epochs, initial_learning_rate=0.5, final_learning_rate=0.01):
+        final_epoch = round(0.6*epochs)
+        learning_rate = initial_learning_rate
         for i in range(epochs):
+            if i <= final_epoch:
+                learning_rate = model_utils.eta_decay(actual_epoch=i, final_epoch=final_epoch, initial_learning_rate= initial_learning_rate, final_learning_rate=final_learning_rate)
             np.random.shuffle(training_base)
             for sample in training_base:
                 x_training = sample[:self.n_features+1]

@@ -19,4 +19,9 @@ def hit_rate(predicted_labels, desired_labels, activations=None):
             hit.append(1)
 
     rate = (len(hit) / desired_labels.shape[0]) * 100
-    print('Hit Rate: {}%'.format(round(rate, 2)))
+    return round(rate, 2)
+
+
+def eta_decay(actual_epoch, final_epoch, initial_learning_rate, final_learning_rate):
+    new_eta = initial_learning_rate * ((final_learning_rate / initial_learning_rate)**(actual_epoch/final_epoch))
+    return new_eta

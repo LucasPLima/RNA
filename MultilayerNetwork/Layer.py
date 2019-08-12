@@ -1,4 +1,4 @@
-from .LogisticNeuron import LogisticNeuronML
+from MultilayerNetwork.Neurons.LogisticNeuron import LogisticNeuronML
 
 
 class Layer:
