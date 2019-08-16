@@ -3,6 +3,7 @@ import numpy as np
 from Utils import dataset_utils
 import itertools
 import yaml
+import pandas as pd
 from sklearn import preprocessing, datasets
 
 
@@ -106,11 +107,78 @@ def load_multiclass_artificial():
     return new_dataset, n_features
 
 
+def load_breast_cancer():
+    breast_cancer_file = pd.read_csv('datasets/breast-cancer-wisconsin.csv', header=None)
+    breast_cancer_dataset = np.array(breast_cancer_file)
+    labels_bc = breast_cancer_dataset[:, -1]
+    labels_bc = np.where(labels_bc == 4, 1, 0)
+    breast_cancer_dataset[:, -1] = labels_bc
+    new_breast_cancer = dataset_utils.prepare_data(breast_cancer_dataset)
+    n_features = new_breast_cancer.shape[1]-2
+
+    return new_breast_cancer, n_features
+
+
+def load_verbetral():
+    vertebral_file = pd.read_csv('datasets/column_3C.dat', header=None, sep=' ')
+    vertebral_dataset = np.array(vertebral_file)
+    new_vertebral = dataset_utils.prepare_data(vertebral_dataset)
+    n_features = new_vertebral.shape[1] - 2
+
+    return new_vertebral, n_features
+
+
+def load_dermatology():
+    dermatology_file = pd.read_csv('datasets/dermatology.data', header=None)
+    dermatology_dataset = np.array(dermatology_file)
+    ages = [int(age) for age in dermatology_dataset[:, -2]]
+    dermatology_dataset[:, -2] = np.array(ages)
+    new_dermatology = dataset_utils.prepare_data(dermatology_dataset)
+    n_features = new_dermatology.shape[1] - 2
+
+    return new_dermatology, n_features
+
+
+def load_xor():
+    dataset = []
+    for i in range(200):
+        if i < 50:
+            x = 0.0 + np.random.uniform(-0.1, 0.1)
+            y = 0.0 + np.random.uniform(-0.1, 0.1)
+            label = 1
+        elif i < 100:
+            x = 0.0 + np.random.uniform(-0.1, 0.1)
+            y = 1.0 + np.random.uniform(-0.1, 0)
+            label = 0
+
+        elif i < 150:
+            x = 1.0 + np.random.uniform(-0.1, 0)
+            y = 0.0 + np.random.uniform(-0.1, 0.1)
+            label = 0
+        else:
+            x = 1.0 + np.random.uniform(-0.1, 0)
+            y = 1.0 + np.random.uniform(-0.1, 0)
+            label = 1
+        dataset.append([-1, x, y, label])
+    n_features = 2
+    return np.array(dataset), n_features
+
+
 def load_multiclass_base(chosen_base):
     if chosen_base == 'Iris':
         return load_multiclass_iris()
     elif chosen_base == 'Artificial':
         return load_multiclass_artificial()
+    elif chosen_base == 'Breast Cancer':
+        return load_breast_cancer()
+    elif chosen_base == 'Vertebral':
+        return load_verbetral()
+    elif chosen_base == 'Dermatology':
+        return load_dermatology()
+    elif chosen_base == 'XOR':
+        return load_xor()
+    elif chosen_base == 'Artificial 1':
+        pass
     else:
         print('Base escolhida não é válida.')
         print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')
