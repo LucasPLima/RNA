@@ -7,7 +7,7 @@ class MLP:
     def __init__(self, n_layers,
                  n_neurons,
                  n_features,
-                 hidden_layer_func='Logistic'):
+                 output_layer_func='Logistic'):
         self.n_layers = n_layers
         self.n_features = n_features
         self.layers = [Layer(is_output_layer=False, nu_neurons=n_neurons[0], nu_features=self.n_features)]
@@ -15,9 +15,10 @@ class MLP:
             if i != n_layers-1:
                 self.layers.append(Layer(is_output_layer=False, nu_neurons=n_neurons[i], nu_features=n_neurons[i-1]))
             else:
-                self.layers.append(Layer(is_output_layer=True, nu_neurons=n_neurons[i], nu_features=n_neurons[i-1]))
+                self.layers.append(Layer(is_output_layer=True, nu_neurons=n_neurons[i], nu_features=n_neurons[i-1],
+                                         neuron_type=output_layer_func))
 
-    def training(self, training_base, epochs, initial_learning_rate=0.5, final_learning_rate=0.01):
+    def training(self, training_base, epochs, initial_learning_rate=0.5, final_learning_rate=0.1):
         final_epoch = round(0.6*epochs)
         learning_rate = initial_learning_rate
         for i in range(epochs):
