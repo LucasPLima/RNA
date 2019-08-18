@@ -23,8 +23,8 @@ def choose_realization(realizations, criterion_choiced):
 
     accuracy = accuracy / len(realizations)
     standard_deviation = float(np.std(hit_rates))
-    print('Accuracy: {}%'.format(round(accuracy, 2)))
-    print('Standard Deviation: {}'.format(round(standard_deviation, 2)))
+    print('Acurácia: {}%'.format(round(accuracy, 2)))
+    print('Desvio Padrão: {}'.format(round(standard_deviation, 2)))
 
     if criterion_choiced == 1:
         best_result = max(hit_rates)
@@ -39,5 +39,35 @@ def choose_realization(realizations, criterion_choiced):
         worst_result = min(hit_rates)
         n = hit_rates.index(worst_result)
         print('Pior realização: {} (Taxa de acerto: {})'.format(n+1, hit_rates[n]))
+
+    return realizations[n]
+
+
+def choose_best_realization_regression(realizations, criterion_choiced):
+    m_rmse = []
+
+    for i in range(len(realizations)):
+        m_rmse.append(realizations[i]['rmse'])
+
+    print('RMSE Médio: {}'.format(round(float(np.mean(m_rmse)), 4)))
+    print('Desvio Padrão: {}'.format(np.std(m_rmse)))
+
+    if criterion_choiced == 1:
+        best_result = min(m_rmse)
+        n = m_rmse.index(best_result)
+        print('Melhor realização: {} (RMSE: {}).'.format(n + 1, m_rmse[n]))
+    elif criterion_choiced == 2:
+        mean_rmse = round(float(np.mean(m_rmse)), 2)
+        d_means = [abs(mean_rmse - h) for h in m_rmse]
+        nearest_accuracy = min(d_means)
+        n = d_means.index(nearest_accuracy)
+        print('Realização mais próxima da média: {}(RMSE: {}).'.format(n + 1, round(m_rmse[n], 2)))
+    else:
+        worst_result = max(m_rmse)
+        n = m_rmse.index(worst_result)
+        print('Pior realização: {} (RMSE: {})'.format(n+1, m_rmse[n]))
+
+    print('\nRealização escolhida: {}'.format(n + 1))
+    print('RMSE da realização escolhida: {} \n'.format(realizations[n]['rmse']))
 
     return realizations[n]

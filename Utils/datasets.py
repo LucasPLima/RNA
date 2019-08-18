@@ -1,9 +1,10 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from Utils import dataset_utils
-import itertools
 import yaml
+import itertools
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+from math import sin
+from Utils import dataset_utils
 from sklearn import preprocessing, datasets
 
 
@@ -164,12 +165,26 @@ def load_xor():
     return np.array(dataset), n_features
 
 
+def load_artificial_regression():
+    def regression_function(x):
+        return 3 * sin(x) + 1
+    N = 500
+    regression_dataset = np.random.normal(size=N).reshape((N, 1))
+    y_regression = np.array([regression_function(x) for x in regression_dataset]).reshape((N, 1))
+    regression_dataset = np.append(regression_dataset, y_regression, axis=1)
+    new_dataset = dataset_utils.prepare_data(np.array(regression_dataset))
+    n_features = 1
+    plt.scatter(new_dataset[:, 1], new_dataset[:, -1])
+    plt.show()
+    return new_dataset, n_features
+
+
 def load_multiclass_base(chosen_base):
     if chosen_base == 'Iris':
         return load_multiclass_iris()
     elif chosen_base == 'Artificial':
         return load_multiclass_artificial()
-    elif chosen_base == 'Breast Cancer':
+    elif chosen_base == 'Breast_Cancer':
         return load_breast_cancer()
     elif chosen_base == 'Vertebral':
         return load_verbetral()
@@ -177,8 +192,8 @@ def load_multiclass_base(chosen_base):
         return load_dermatology()
     elif chosen_base == 'XOR':
         return load_xor()
-    elif chosen_base == 'Artificial 1':
-        pass
+    elif chosen_base == 'Artificial_1':
+        return load_artificial_regression()
     else:
         print('Base escolhida não é válida.')
         print('Verifique o arquivo "runConfigurations.yml" e veja se as configurações estão corretas.')

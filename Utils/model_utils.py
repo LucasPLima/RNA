@@ -1,8 +1,10 @@
+import yaml
 import numpy as np
 from MultilayerNetwork import GenericMultilayerNetwork as gmn
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import KFold
 from Utils import dataset_utils
-import yaml
+from math import sqrt
 
 
 def validate_predict(predict, activations):
@@ -33,6 +35,12 @@ def hit_rate(predicted_labels, desired_labels, activations=None):
 def eta_decay(actual_epoch, final_epoch, initial_learning_rate, final_learning_rate):
     new_eta = initial_learning_rate * ((final_learning_rate / initial_learning_rate)**(actual_epoch/final_epoch))
     return new_eta
+
+
+def rmse(predicted_labels, desired_labels):
+    mean_se = mean_squared_error(desired_labels, predicted_labels)
+    rad_mse = sqrt(mean_se)
+    return rad_mse
 
 
 def cross_validation(splits, n_hidden_neurons, base, n_features, n_classes, chosen_base):

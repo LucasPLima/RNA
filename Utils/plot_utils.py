@@ -93,7 +93,9 @@ def plot_results(realization, configurations):
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Matriz de Confusão',
-                          cmap=plt.cm.Blues):
+                          cmap=plt.cm.Blues,
+                          chosen_base='Iris',
+                          model='MLP'):
     """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
@@ -122,6 +124,7 @@ def plot_confusion_matrix(cm, classes,
 
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
+    plt.savefig('plots/{}_confusion_matrix_{}'.format(model, chosen_base))
     plt.tight_layout()
 
 
@@ -248,3 +251,38 @@ def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type)
         plt.show()
     else:
         print("Can't plot decision region for a dataset with more than 2 features.")
+
+
+def plot_regression(predict, test_base, model='MLP'):
+    ax = plt.gca()
+    plt.scatter(test_base[:, 1], test_base[:, -1], label='Data', c='b')
+
+    plt.scatter(test_base[:, 1], predict, marker='o', c='r', label='Predict')
+
+    ax.set(xlabel='X', ylabel='Y',
+           title='Decision Region for Artificial Data')
+    ax.grid()
+    ax.legend()
+    plt.savefig('plots/Artificial_1_{}_epochs_error.png'.format(model))
+    plt.show()
+
+
+def plot_conf_matrix(predict, desired_label, chosen_base, n_labels, model):
+    plt.rcParams['figure.figsize'] = (11, 7)
+
+    predict_conv = np.array(predict)
+    desired_conv = desired_label
+
+    if n_labels > 2:
+        predict_conv = dataset_utils.convert_labels(np.array(predict), n_labels)
+        desired_conv = dataset_utils.convert_labels(desired_label, n_labels)
+
+    cnf_matrix = confusion_matrix(desired_conv, predict_conv)
+    np.set_printoptions(precision=2)
+
+    class_names = ['Class ' + str(i) for i in range(n_labels)]
+
+    plt.figure()
+    plot_confusion_matrix(cnf_matrix, classes=class_names, model=model,
+                          chosen_base=chosen_base, title='Matriz de Confusão - {}'.format(chosen_base))
+    plt.show()
