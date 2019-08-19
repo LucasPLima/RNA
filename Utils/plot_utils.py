@@ -276,10 +276,7 @@ def plot_conf_matrix(predict, desired_label, chosen_base, n_labels, model):
     predict_conv = np.array(predict)
     desired_conv = desired_label
 
-    #new_convert_labels(predicted_labels, desired_labels, n_classes)
-    #return new_desired, new_predicted
     if n_labels > 2:
-        #predict_conv = dataset_utils.convert_labels(np.array(predict), n_labels)
         desired_conv, predict_conv = dataset_utils.new_convert_labels(predict_conv, desired_conv, n_labels)
 
     cnf_matrix = confusion_matrix(desired_conv, predict_conv)

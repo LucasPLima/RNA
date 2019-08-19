@@ -1,0 +1,44 @@
+Base escolhida: Dermatology
+Realização: 1 | Tempo de treinamento:0.0 | Taxa de acerto: 90.28%
+----------------------------------------------------------------------
+Realização: 2 | Tempo de treinamento:0.01 | Taxa de acerto: 93.06%
+----------------------------------------------------------------------
+Realização: 3 | Tempo de treinamento:0.0 | Taxa de acerto: 91.67%
+----------------------------------------------------------------------
+Realização: 4 | Tempo de treinamento:0.0 | Taxa de acerto: 97.22%
+----------------------------------------------------------------------
+Realização: 5 | Tempo de treinamento:0.0 | Taxa de acerto: 97.22%
+----------------------------------------------------------------------
+Realização: 6 | Tempo de treinamento:0.0 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Realização: 7 | Tempo de treinamento:0.0 | Taxa de acerto: 90.28%
+----------------------------------------------------------------------
+Realização: 8 | Tempo de treinamento:0.0 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Realização: 9 | Tempo de treinamento:0.0 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Realização: 10 | Tempo de treinamento:0.0 | Taxa de acerto: 98.61%
+----------------------------------------------------------------------
+Realização: 11 | Tempo de treinamento:0.0 | Taxa de acerto: 98.61%
+----------------------------------------------------------------------
+Realização: 12 | Tempo de treinamento:0.0 | Taxa de acerto: 98.61%
+----------------------------------------------------------------------
+Realização: 13 | Tempo de treinamento:0.0 | Taxa de acerto: 91.67%
+----------------------------------------------------------------------
+Realização: 14 | Tempo de treinamento:0.0 | Taxa de acerto: 90.28%
+----------------------------------------------------------------------
+Realização: 15 | Tempo de treinamento:0.0 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Realização: 16 | Tempo de treinamento:0.0 | Taxa de acerto: 97.22%
+----------------------------------------------------------------------
+Realização: 17 | Tempo de treinamento:0.01 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Realização: 18 | Tempo de treinamento:0.0 | Taxa de acerto: 93.06%
+----------------------------------------------------------------------
+Realização: 19 | Tempo de treinamento:0.0 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Realização: 20 | Tempo de treinamento:0.0 | Taxa de acerto: 94.44%
+----------------------------------------------------------------------
+Acurácia: 94.44%
+Desvio Padrão:2.71
+Tempo de execução total:1 segundos

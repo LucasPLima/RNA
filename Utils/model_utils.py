@@ -1,6 +1,7 @@
 import yaml
 import numpy as np
 from MultilayerNetwork import GenericMultilayerNetwork as gmn
+from MultilayerNetwork import ExtremeLearningMachine as elm
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import KFold
 from Utils import dataset_utils
@@ -76,6 +77,48 @@ def cross_validation(splits, n_hidden_neurons, base, n_features, n_classes, chos
             hit_rates.append(hit)
             realization += 1
             del mlp
+        accuracy.append(np.mean(hit_rates))
+        print('\tAccuracy with {} hidden neurons: {}%'.format(n_hidden_neurons[n], round(accuracy[n], 2)))
+        log_file.write('\tAccuracy with {} hidden neurons: {}%\n'.format(n_hidden_neurons[n], round(accuracy[n], 2)))
+
+    print('Cross Validation end.')
+    log_file.close()
+    best_realization = max(accuracy)
+    return n_hidden_neurons[accuracy.index(best_realization)]
+
+
+def cross_validation_elm(splits, n_hidden_neurons, base, n_features, n_classes, chosen_base, model='ELM'):
+    print('Cross Validation init:')
+
+    stream = open('configurations/runConfigurations.yml', 'r', encoding='utf-8').read()
+    settings = yaml.load(stream=stream, Loader=yaml.FullLoader)
+    log_file = open('grid_search_log/{}_{}_log.txt'.format(model, chosen_base), 'w')
+
+    folds = KFold(n_splits=splits)
+    np.random.shuffle(base)
+    grid_search_base = base[0:int(round((1 - settings['test_size']) * base.shape[0])), :]
+    n_output_neurons = 1 if n_classes == 2 else n_classes
+
+    if n_classes > 2:
+        grid_search_base = dataset_utils.binarize_labels(grid_search_base)
+    accuracy = []
+    for n in range(len(n_hidden_neurons)):
+        realization = 0
+        hit_rates = []
+        print('Number of hidden neurons:{}'.format(n_hidden_neurons[n]))
+        log_file.write('Number of hidden neurons:{}\n'.format(n_hidden_neurons[n]))
+        for train_index, test_index in folds.split(grid_search_base):
+            training_base = grid_search_base[train_index, :]
+            test_base = grid_search_base[test_index, :]
+            elm_test = elm.ELM(2, [n_hidden_neurons[n], n_output_neurons], n_features)
+            elm_test.training(training_base)
+            predicted_labels, activations = elm_test.predict(test_base)
+            hit = hit_rate(predicted_labels, test_base[:, n_features + 1:], activations)
+            print('\tHit rate for realization {}: {}%'.format(realization + 1, hit))
+            log_file.write('\tHit rate for realization {}: {}%\n'.format(realization + 1, hit))
+            hit_rates.append(hit)
+            realization += 1
+            del elm_test
         accuracy.append(np.mean(hit_rates))
         print('\tAccuracy with {} hidden neurons: {}%'.format(n_hidden_neurons[n], round(accuracy[n], 2)))
         log_file.write('\tAccuracy with {} hidden neurons: {}%\n'.format(n_hidden_neurons[n], round(accuracy[n], 2)))

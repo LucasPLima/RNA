@@ -1,0 +1,44 @@
+Base escolhida: Vertebral
+Realização: 1 | Tempo de treinamento:0.01 | Taxa de acerto: 82.26%
+----------------------------------------------------------------------
+Realização: 2 | Tempo de treinamento:0.01 | Taxa de acerto: 80.65%
+----------------------------------------------------------------------
+Realização: 3 | Tempo de treinamento:0.02 | Taxa de acerto: 80.65%
+----------------------------------------------------------------------
+Realização: 4 | Tempo de treinamento:0.01 | Taxa de acerto: 80.65%
+----------------------------------------------------------------------
+Realização: 5 | Tempo de treinamento:0.01 | Taxa de acerto: 82.26%
+----------------------------------------------------------------------
+Realização: 6 | Tempo de treinamento:0.01 | Taxa de acerto: 83.87%
+----------------------------------------------------------------------
+Realização: 7 | Tempo de treinamento:0.01 | Taxa de acerto: 85.48%
+----------------------------------------------------------------------
+Realização: 8 | Tempo de treinamento:0.0 | Taxa de acerto: 83.87%
+----------------------------------------------------------------------
+Realização: 9 | Tempo de treinamento:0.01 | Taxa de acerto: 87.1%
+----------------------------------------------------------------------
+Realização: 10 | Tempo de treinamento:0.01 | Taxa de acerto: 79.03%
+----------------------------------------------------------------------
+Realização: 11 | Tempo de treinamento:0.01 | Taxa de acerto: 80.65%
+----------------------------------------------------------------------
+Realização: 12 | Tempo de treinamento:0.0 | Taxa de acerto: 88.71%
+----------------------------------------------------------------------
+Realização: 13 | Tempo de treinamento:0.01 | Taxa de acerto: 83.87%
+----------------------------------------------------------------------
+Realização: 14 | Tempo de treinamento:0.01 | Taxa de acerto: 80.65%
+----------------------------------------------------------------------
+Realização: 15 | Tempo de treinamento:0.01 | Taxa de acerto: 88.71%
+----------------------------------------------------------------------
+Realização: 16 | Tempo de treinamento:0.01 | Taxa de acerto: 77.42%
+----------------------------------------------------------------------
+Realização: 17 | Tempo de treinamento:0.01 | Taxa de acerto: 90.32%
+----------------------------------------------------------------------
+Realização: 18 | Tempo de treinamento:0.01 | Taxa de acerto: 83.87%
+----------------------------------------------------------------------
+Realização: 19 | Tempo de treinamento:0.01 | Taxa de acerto: 80.65%
+----------------------------------------------------------------------
+Realização: 20 | Tempo de treinamento:0.01 | Taxa de acerto: 83.87%
+----------------------------------------------------------------------
+Acurácia: 83.23%
+Desvio Padrão:3.36
+Tempo de execução total:1 segundos

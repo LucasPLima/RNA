@@ -1,0 +1,44 @@
+Base escolhida: XOR
+Realização: 1 | Tempo de treinamento:0.0 | Taxa de acerto: 70.0%
+----------------------------------------------------------------------
+Realização: 2 | Tempo de treinamento:0.0 | Taxa de acerto: 85.0%
+----------------------------------------------------------------------
+Realização: 3 | Tempo de treinamento:0.0 | Taxa de acerto: 70.0%
+----------------------------------------------------------------------
+Realização: 4 | Tempo de treinamento:0.0 | Taxa de acerto: 87.5%
+----------------------------------------------------------------------
+Realização: 5 | Tempo de treinamento:0.0 | Taxa de acerto: 85.0%
+----------------------------------------------------------------------
+Realização: 6 | Tempo de treinamento:0.0 | Taxa de acerto: 82.5%
+----------------------------------------------------------------------
+Realização: 7 | Tempo de treinamento:0.0 | Taxa de acerto: 75.0%
+----------------------------------------------------------------------
+Realização: 8 | Tempo de treinamento:0.0 | Taxa de acerto: 77.5%
+----------------------------------------------------------------------
+Realização: 9 | Tempo de treinamento:0.0 | Taxa de acerto: 92.5%
+----------------------------------------------------------------------
+Realização: 10 | Tempo de treinamento:0.0 | Taxa de acerto: 75.0%
+----------------------------------------------------------------------
+Realização: 11 | Tempo de treinamento:0.0 | Taxa de acerto: 90.0%
+----------------------------------------------------------------------
+Realização: 12 | Tempo de treinamento:0.0 | Taxa de acerto: 82.5%
+----------------------------------------------------------------------
+Realização: 13 | Tempo de treinamento:0.0 | Taxa de acerto: 75.0%
+----------------------------------------------------------------------
+Realização: 14 | Tempo de treinamento:0.0 | Taxa de acerto: 87.5%
+----------------------------------------------------------------------
+Realização: 15 | Tempo de treinamento:0.0 | Taxa de acerto: 80.0%
+----------------------------------------------------------------------
+Realização: 16 | Tempo de treinamento:0.0 | Taxa de acerto: 80.0%
+----------------------------------------------------------------------
+Realização: 17 | Tempo de treinamento:0.0 | Taxa de acerto: 70.0%
+----------------------------------------------------------------------
+Realização: 18 | Tempo de treinamento:0.0 | Taxa de acerto: 85.0%
+----------------------------------------------------------------------
+Realização: 19 | Tempo de treinamento:0.0 | Taxa de acerto: 82.5%
+----------------------------------------------------------------------
+Realização: 20 | Tempo de treinamento:0.0 | Taxa de acerto: 72.5%
+----------------------------------------------------------------------
+Acurácia: 80.25%
+Desvio Padrão:6.7
+Tempo de execução total:1 segundos

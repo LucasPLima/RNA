@@ -1,0 +1,44 @@
+Base escolhida: Breast_Cancer
+Realização: 1 | Tempo de treinamento:0.0 | Taxa de acerto: 62.77%
+----------------------------------------------------------------------
+Realização: 2 | Tempo de treinamento:0.0 | Taxa de acerto: 71.53%
+----------------------------------------------------------------------
+Realização: 3 | Tempo de treinamento:0.0 | Taxa de acerto: 67.88%
+----------------------------------------------------------------------
+Realização: 4 | Tempo de treinamento:0.0 | Taxa de acerto: 72.99%
+----------------------------------------------------------------------
+Realização: 5 | Tempo de treinamento:0.0 | Taxa de acerto: 70.8%
+----------------------------------------------------------------------
+Realização: 6 | Tempo de treinamento:0.0 | Taxa de acerto: 72.99%
+----------------------------------------------------------------------
+Realização: 7 | Tempo de treinamento:0.0 | Taxa de acerto: 78.1%
+----------------------------------------------------------------------
+Realização: 8 | Tempo de treinamento:0.0 | Taxa de acerto: 75.18%
+----------------------------------------------------------------------
+Realização: 9 | Tempo de treinamento:0.0 | Taxa de acerto: 70.8%
+----------------------------------------------------------------------
+Realização: 10 | Tempo de treinamento:0.0 | Taxa de acerto: 67.15%
+----------------------------------------------------------------------
+Realização: 11 | Tempo de treinamento:0.0 | Taxa de acerto: 72.99%
+----------------------------------------------------------------------
+Realização: 12 | Tempo de treinamento:0.0 | Taxa de acerto: 72.99%
+----------------------------------------------------------------------
+Realização: 13 | Tempo de treinamento:0.01 | Taxa de acerto: 64.23%
+----------------------------------------------------------------------
+Realização: 14 | Tempo de treinamento:0.0 | Taxa de acerto: 74.45%
+----------------------------------------------------------------------
+Realização: 15 | Tempo de treinamento:0.01 | Taxa de acerto: 72.26%
+----------------------------------------------------------------------
+Realização: 16 | Tempo de treinamento:0.0 | Taxa de acerto: 74.45%
+----------------------------------------------------------------------
+Realização: 17 | Tempo de treinamento:0.0 | Taxa de acerto: 77.37%
+----------------------------------------------------------------------
+Realização: 18 | Tempo de treinamento:0.0 | Taxa de acerto: 73.72%
+----------------------------------------------------------------------
+Realização: 19 | Tempo de treinamento:0.0 | Taxa de acerto: 70.07%
+----------------------------------------------------------------------
+Realização: 20 | Tempo de treinamento:0.0 | Taxa de acerto: 67.88%
+----------------------------------------------------------------------
+Acurácia: 71.53%
+Desvio Padrão:3.88
+Tempo de execução total:1 segundos

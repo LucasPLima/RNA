@@ -1,0 +1,42 @@
+Number of hidden neurons:20
+	Hit rate for realization 1: 84.0%
+	Hit rate for realization 2: 90.0%
+	Hit rate for realization 3: 80.0%
+	Hit rate for realization 4: 89.8%
+	Hit rate for realization 5: 79.59%
+	Accuracy with 20 hidden neurons: 84.68%
+Number of hidden neurons:25
+	Hit rate for realization 1: 82.0%
+	Hit rate for realization 2: 88.0%
+	Hit rate for realization 3: 84.0%
+	Hit rate for realization 4: 91.84%
+	Hit rate for realization 5: 79.59%
+	Accuracy with 25 hidden neurons: 85.09%
+Number of hidden neurons:30
+	Hit rate for realization 1: 84.0%
+	Hit rate for realization 2: 86.0%
+	Hit rate for realization 3: 82.0%
+	Hit rate for realization 4: 89.8%
+	Hit rate for realization 5: 79.59%
+	Accuracy with 30 hidden neurons: 84.28%
+Number of hidden neurons:35
+	Hit rate for realization 1: 86.0%
+	Hit rate for realization 2: 90.0%
+	Hit rate for realization 3: 80.0%
+	Hit rate for realization 4: 91.84%
+	Hit rate for realization 5: 81.63%
+	Accuracy with 35 hidden neurons: 85.89%
+Number of hidden neurons:40
+	Hit rate for realization 1: 86.0%
+	Hit rate for realization 2: 88.0%
+	Hit rate for realization 3: 76.0%
+	Hit rate for realization 4: 87.76%
+	Hit rate for realization 5: 81.63%
+	Accuracy with 40 hidden neurons: 83.88%
+Number of hidden neurons:50
+	Hit rate for realization 1: 90.0%
+	Hit rate for realization 2: 82.0%
+	Hit rate for realization 3: 76.0%
+	Hit rate for realization 4: 83.67%
+	Hit rate for realization 5: 85.71%
+	Accuracy with 50 hidden neurons: 83.48%
