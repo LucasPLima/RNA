@@ -199,7 +199,7 @@ def plot_epochs_error(realization, chosen_base, neuron_type):
     plt.show()
 
 
-def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type):
+def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type='L'):
     plt.rcParams['figure.figsize'] = (11, 7)
     plot_colors = "ryb"
     plot_step = 0.01
@@ -237,6 +237,9 @@ def plot_decision_region_mult(realization, n_classes, choosen_base, neuron_type)
             plt.xlabel(iris_cfg['features'][0])
             plt.ylabel(iris_cfg['features'][1])
             classes = ['Iris-setosa', 'Iris-versicolor', 'Iris-virginica']
+        else:
+            plt.xlabel('Attribute 1')
+            plt.ylabel('Attribute 2')
 
         for i, color in zip(range(n_classes), plot_colors):
             idx = np.where(Y_sample == i)
@@ -273,9 +276,11 @@ def plot_conf_matrix(predict, desired_label, chosen_base, n_labels, model):
     predict_conv = np.array(predict)
     desired_conv = desired_label
 
+    #new_convert_labels(predicted_labels, desired_labels, n_classes)
+    #return new_desired, new_predicted
     if n_labels > 2:
-        predict_conv = dataset_utils.convert_labels(np.array(predict), n_labels)
-        desired_conv = dataset_utils.convert_labels(desired_label, n_labels)
+        #predict_conv = dataset_utils.convert_labels(np.array(predict), n_labels)
+        desired_conv, predict_conv = dataset_utils.new_convert_labels(predict_conv, desired_conv, n_labels)
 
     cnf_matrix = confusion_matrix(desired_conv, predict_conv)
     np.set_printoptions(precision=2)
@@ -285,4 +290,4 @@ def plot_conf_matrix(predict, desired_label, chosen_base, n_labels, model):
     plt.figure()
     plot_confusion_matrix(cnf_matrix, classes=class_names, model=model,
                           chosen_base=chosen_base, title='Matriz de Confusão - {}'.format(chosen_base))
-    plt.show()
+    #plt.show()

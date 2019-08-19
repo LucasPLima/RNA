@@ -20,7 +20,7 @@ def main():
 
     total_execution_init = time.time()
     #n_neurons = model_utils.cross_validation(5, [5, 7, 9, 11, 13], deepcopy(dataset), n_features, n_labels, settings['chosen_base'])
-    n_neurons = 2
+    n_neurons = 3
     execution_log = open('execution_logs/{}_{}_neurons.txt'.format(settings['chosen_base'], n_neurons), 'w')
     scenarios = []
     rmses = []

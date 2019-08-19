@@ -16,6 +16,10 @@ class LogisticNeuronML:
         self.output = 1 / (1 + exp(-self.u))
         self.d_y = self.output * (1 - self.output)
 
+    @staticmethod
+    def act_function(u):
+        return 1 / (1+np.exp(-u))
+
     def adjust_weights(self, error, learning_rate):
         self.weights = self.weights + np.dot((learning_rate * error * self.d_y), self.x)
 

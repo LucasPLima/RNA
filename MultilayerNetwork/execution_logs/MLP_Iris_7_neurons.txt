@@ -1,44 +1,44 @@
 Base escolhida: Iris
-Realização: 1 | Tempo de treinamento:2.52 | Taxa de acerto: 96.67%
+Realização: 1 | Tempo de treinamento:3.04 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 2 | Tempo de treinamento:2.59 | Taxa de acerto: 93.33%
+Realização: 2 | Tempo de treinamento:2.84 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 3 | Tempo de treinamento:2.52 | Taxa de acerto: 100.0%
+Realização: 3 | Tempo de treinamento:3.74 | Taxa de acerto: 93.33%
 ----------------------------------------------------------------------
-Realização: 4 | Tempo de treinamento:2.5 | Taxa de acerto: 100.0%
+Realização: 4 | Tempo de treinamento:3.3 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 5 | Tempo de treinamento:2.78 | Taxa de acerto: 93.33%
+Realização: 5 | Tempo de treinamento:3.34 | Taxa de acerto: 93.33%
 ----------------------------------------------------------------------
-Realização: 6 | Tempo de treinamento:2.67 | Taxa de acerto: 100.0%
+Realização: 6 | Tempo de treinamento:3.2 | Taxa de acerto: 86.67%
 ----------------------------------------------------------------------
-Realização: 7 | Tempo de treinamento:3.74 | Taxa de acerto: 93.33%
+Realização: 7 | Tempo de treinamento:3.21 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 8 | Tempo de treinamento:2.55 | Taxa de acerto: 100.0%
+Realização: 8 | Tempo de treinamento:3.1 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 9 | Tempo de treinamento:2.59 | Taxa de acerto: 96.67%
+Realização: 9 | Tempo de treinamento:3.57 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 10 | Tempo de treinamento:2.51 | Taxa de acerto: 96.67%
+Realização: 10 | Tempo de treinamento:2.91 | Taxa de acerto: 93.33%
 ----------------------------------------------------------------------
-Realização: 11 | Tempo de treinamento:2.55 | Taxa de acerto: 100.0%
+Realização: 11 | Tempo de treinamento:2.72 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 12 | Tempo de treinamento:2.53 | Taxa de acerto: 96.67%
+Realização: 12 | Tempo de treinamento:2.95 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 13 | Tempo de treinamento:2.57 | Taxa de acerto: 100.0%
+Realização: 13 | Tempo de treinamento:2.87 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 14 | Tempo de treinamento:2.56 | Taxa de acerto: 86.67%
+Realização: 14 | Tempo de treinamento:2.78 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 15 | Tempo de treinamento:2.54 | Taxa de acerto: 100.0%
+Realização: 15 | Tempo de treinamento:2.85 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 16 | Tempo de treinamento:2.54 | Taxa de acerto: 96.67%
+Realização: 16 | Tempo de treinamento:2.96 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
-Realização: 17 | Tempo de treinamento:2.56 | Taxa de acerto: 96.67%
+Realização: 17 | Tempo de treinamento:3.01 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 18 | Tempo de treinamento:2.76 | Taxa de acerto: 93.33%
+Realização: 18 | Tempo de treinamento:2.99 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 19 | Tempo de treinamento:2.57 | Taxa de acerto: 100.0%
+Realização: 19 | Tempo de treinamento:3.58 | Taxa de acerto: 100.0%
 ----------------------------------------------------------------------
-Realização: 20 | Tempo de treinamento:2.56 | Taxa de acerto: 96.67%
+Realização: 20 | Tempo de treinamento:2.98 | Taxa de acerto: 96.67%
 ----------------------------------------------------------------------
 Acurácia: 96.83%
-Desvio Padrão:3.41
-Tempo de execução total:105 segundos
+Desvio Padrão:3.24
+Tempo de execução total:124 segundos

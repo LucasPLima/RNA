@@ -7,11 +7,11 @@ from copy import deepcopy
 import numpy as np
 
 
-def main():
+def main(chosen_base):
     stream = open('configurations/runConfigurations.yml', 'r', encoding='utf-8').read()
     settings = yaml.load(stream=stream, Loader=yaml.FullLoader)
 
-    dataset, n_features = datasets.load_multiclass_base(settings['chosen_base'])
+    dataset, n_features = datasets.load_multiclass_base(chosen_base)
     n_labels = len(list(set(dataset[:, -1])))
     n_output_neurons = 1 if n_labels == 2 else n_labels
 
@@ -21,15 +21,15 @@ def main():
     realizations = settings['realizations']
 
     total_execution_init = time.time()
-    n_neurons = model_utils.cross_validation(5, [5, 7, 9, 11, 13], deepcopy(dataset), n_features, n_labels, settings['chosen_base'])
-    execution_log = open('execution_logs/{}_{}_neurons.txt'.format(settings['chosen_base'], n_neurons), 'w')
+    n_neurons = model_utils.cross_validation(5, [5, 7, 9, 11, 13], deepcopy(dataset), n_features, n_labels, chosen_base)
+    execution_log = open('execution_logs/MLP_{}_{}_neurons.txt'.format(chosen_base, n_neurons), 'w')
     scenarios = []
     hit_rates = []
-    execution_log.write('Base escolhida: {}\n'.format(settings['chosen_base']))
+    execution_log.write('Base escolhida: {}\n'.format(chosen_base))
     print('Número de neurônios escohidos: {}.'.format(n_neurons))
     for i in range(realizations):
         training_base, test_base = train_test_split(dataset, test_size=settings['test_size'], stratify=dataset[:, -1])
-        if n_labels > 2 and settings['chosen_base'] != '':
+        if n_labels > 2:
             training_base = dataset_utils.binarize_labels(training_base)
             test_base = dataset_utils.binarize_labels(test_base)
         start = time.time()
@@ -41,7 +41,7 @@ def main():
         predicted_labels, activations = mlp_test.predict(test_base)
         hit_rate = model_utils.hit_rate(predicted_labels, test_base[:, n_features+1:], activations)
         scenarios.append({'hit_rate': hit_rate,
-                          'ml_net': deepcopy(mlp_test),
+                          'ol_net': deepcopy(mlp_test),
                           'training_base': training_base,
                           'test_base': test_base,
                           'predict': predicted_labels})
@@ -56,8 +56,8 @@ def main():
     best_realization = log_utils.choose_realization(scenarios, settings['criterion_choiced'])
     total_execution_final = time.time()
     plot_utils.plot_conf_matrix(predict=best_realization['predict'],
-                                desired_label= best_realization['test_base'][:, n_features+1:],
-                                chosen_base=settings['chosen_base'],
+                                desired_label=best_realization['test_base'][:, n_features+1:],
+                                chosen_base=chosen_base,
                                 n_labels=n_labels,
                                 model='MLP')
 
@@ -67,4 +67,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    bases = ['Iris', 'Breast_Cancer', 'Dermatology', 'Vertebral', 'XOR' , 'Artificial_1']
+    for base in bases:
+        main(base)

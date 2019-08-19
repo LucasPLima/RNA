@@ -43,12 +43,12 @@ def rmse(predicted_labels, desired_labels):
     return rad_mse
 
 
-def cross_validation(splits, n_hidden_neurons, base, n_features, n_classes, chosen_base):
+def cross_validation(splits, n_hidden_neurons, base, n_features, n_classes, chosen_base, model='MLP'):
     print('Cross Validation init:')
 
     stream = open('configurations/runConfigurations.yml', 'r', encoding='utf-8').read()
     settings = yaml.load(stream=stream, Loader=yaml.FullLoader)
-    log_file = open('grid_search_log/{}_log.txt'.format(chosen_base), 'w')
+    log_file = open('grid_search_log/{}_{}_log.txt'.format(model, chosen_base), 'w')
 
     folds = KFold(n_splits=splits)
     np.random.shuffle(base)

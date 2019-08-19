@@ -34,6 +34,16 @@ def convert_labels(labels, n_classes):
     return new_labels
 
 
+def new_convert_labels(predicted_labels, desired_labels, n_classes):
+    label_binarizer = preprocessing.LabelBinarizer()
+    classes = list(range(n_classes))
+    label_binarizer.fit(classes)
+    new_predicted = np.array(label_binarizer.inverse_transform(predicted_labels))
+    new_desired = np.array(label_binarizer.inverse_transform(desired_labels))
+
+    return new_desired, new_predicted
+
+
 def binarize_labels(dataset, neuron_type='L'):
     labels = dataset[:, -1]
     classes = list(set(labels))
